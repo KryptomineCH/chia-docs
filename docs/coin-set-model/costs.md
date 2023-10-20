@@ -15,7 +15,7 @@ It is important to keep the cost usage of programs on the Chia blockchain as low
 
 Every CLVM program uses a certain amount of cost during execution, based on the operators and the values they are called on. You can refer to the [Cost page](https://chialisp.com/costs) on the Chialisp website to learn more about the cost of various CLVM operators.
 
-Additionally, any conditions that a CLVM program outputs have a cost associated with them as well. Most notably, creating a coin is a very expensive operation. You can refer to the [Conditions page](/conditions#costs) to learn more.
+Additionally, certain conditions in a coin spend have a cost associated with them as well. A few common examples are [`CREATE_COIN`](/conditions#create-coin) and [`AGG_SIG_ME`](/conditions#agg-sig-me), which are expensive operations.
 
 Finally, each byte of data that gets added to the blockchain has a cost of 12,000. Spend bundles are created using a serialized format of CLVM programs, calculated by running [opc](https://chialisp.com/commands#serialize) on the original CLVM program. Each two-digit pair of this format is equivalent to one byte, which costs 12,000 to store on the blockchain.
 
@@ -25,15 +25,15 @@ Aside from cost, the maximum number of atoms and pairs (counted separately) in a
 
 The minimum spec machine to run a full node is the Raspberry Pi 4. How do we know if this machine can stay synced? The worst case scenario occurs when multiple full transaction blocks are created with the minimum amount of time between them. This will temporarily put maximum load on the system. If the Pi can stay synced in this scenario, then it easily should be able to stay synced under normal load.
 
-The first question we must answer is how much time elapses between transaction blocks. Chia's consensus mandates that at least three signage points must be reached before infusion_iterations may occur, so the minimum time between blocks is
+The first question we must answer is how much time elapses between transaction blocks. Chia's consensus mandates that at least three signage points must be reached before infusion_iterations may occur, so the minimum time between blocks is the following:
 
-`3 signage points * signage point time`, which equals
+```
+3 signage points * signage point time
+3 signage points * (600 seconds per sub-slot / 64 signage points per sub-slot)
+3 signage points * 9.375 seconds per signage point
+```
 
-`3 signage points * (600 seconds per sub-slot / 64 signage points per sub-slot)`, which equals
-
-`3 signage points * 9.375 seconds per signage point`, which equals
-
-`28.125 seconds`
+Which is 28.125 seconds.
 
 :::note
 The **average** time between transaction blocks is [51.95 seconds](/consensus-foliage#transaction-block-time). The lower a given time interval between transaction blocks (down to 28.125 seconds), the lower the probability of a transaction block being created in that time interval.

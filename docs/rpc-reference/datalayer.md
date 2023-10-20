@@ -48,11 +48,11 @@ Note: Hashes used as arguments for the commands documented here may or may not b
 
 ## Reference
 
-### `create_data_store`
+### `add_mirror`
 
-Functionality: Create a data store. Triggers a Chia transaction
+Functionality: Add a new mirror from an owned or subscribed data store. Triggers a Chia transaction
 
-Usage: chia rpc data_layer [OPTIONS] create_data_store [REQUEST]
+Usage: chia rpc data_layer [OPTIONS] add_mirror [REQUEST]
 
 Options:
 
@@ -63,167 +63,41 @@ Options:
 
 Request Parameters:
 
-| Flag | Type | Required | Description                               |
-| :--- | :--- | :------- | :---------------------------------------- |
-| fee  | TEXT | False    | Set the fee for the transaction, in mojos |
+| Flag   | Type    | Required | Description                                                                                                      |
+| :----- | :------ | :------- | :--------------------------------------------------------------------------------------------------------------- |
+| id     | TEXT    | True     | The hexadecimal ID of the store to mirror                                                                        |
+| urls   | TEXT    | True     | A list of URLs where the mirror will reside                                                                      |
+| amount | INTEGER | True     | The number of mojos to spend to create the mirror. In theory, mirrors with a higher `amount` will be prioritized |
+| fee    | TEXT    | False    | Set the fee for the transaction, in mojos                                                                        |
 
 <details>
 <summary>Example</summary>
 
+Create one mirror with multiple URLs:
+
 ```json
-chia rpc data_layer create_data_store '{"fee":"1000"}'
+chia rpc data_layer add_mirror '{"id":"0x1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e", "urls":["http://www.example.com:8575", "http://www.example2.com:8575"], "amount":1000000}'
 ```
 
 Response:
 
 ```json
 {
-  "id": "31264f736a07683097a4b1bbedfa3b4d12631af1595b3905907a441bafb79c61",
-  "success": true,
-  "txs": [
-    {
-      "additions": [
-        {
-          "amount": 1,
-          "parent_coin_info": "0x7a97a37cac145bd13b4da93c496dc32e83a526918727e0f6a1c305af996726e9",
-          "puzzle_hash": "0xeff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9"
-        },
-        {
-          "amount": 10983998895994,
-          "parent_coin_info": "0x7a97a37cac145bd13b4da93c496dc32e83a526918727e0f6a1c305af996726e9",
-          "puzzle_hash": "0xdc2d295cce761abd4123d03e7135c670d6c0ad39ec4e66503cec336439e8a2fb"
-        },
-        {
-          "amount": 1,
-          "parent_coin_info": "0x31264f736a07683097a4b1bbedfa3b4d12631af1595b3905907a441bafb79c61",
-          "puzzle_hash": "0xba017f832d945b23f7b0a3dc4850a3bb9aff6e92cd2a333a7987b60ced1dab0a"
-        }
-      ],
-      "amount": 1,
-      "confirmed": false,
-      "confirmed_at_height": 0,
-      "created_at_time": 1660784389,
-      "fee_amount": 1000,
-      "memos": [],
-      "name": "0x76d1e179a15f097c116e75c73486c3d47f7ebbb4791b5216a2828807f4ad9a5f",
-      "removals": [
-        {
-          "amount": 10983998896995,
-          "parent_coin_info": "0x110a907b5676553746e75623dd32ad231c080e9dabe50a99bc43beebaaa13531",
-          "puzzle_hash": "0x3f5ea6f0f46c1d76fbc72e4116895536f7b7b167f9d9e5a38d708ad3e3fd434a"
-        },
-        {
-          "amount": 1,
-          "parent_coin_info": "0x7a97a37cac145bd13b4da93c496dc32e83a526918727e0f6a1c305af996726e9",
-          "puzzle_hash": "0xeff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9"
-        }
-      ],
-      "sent": 10,
-      "sent_to": [],
-      "spend_bundle": {
-        "aggregated_signature": "0xb600c2cd9ddafb6655e14fe99b293a742746ba82ef3f05b8bb3a375af0d3824011a1909348a16745e19f826aceb2534e08c0d939f01eb92f9bfac5eb8cf0c97bad353d5e0fa89f95f329c45c5797d59fe4b1a8ce23fa6a64bd2ac385170fedd5",
-        "coin_spends": [
-          {
-            "coin": {
-              "amount": 10983998896995,
-              "parent_coin_info": "0x110a907b5676553746e75623dd32ad231c080e9dabe50a99bc43beebaaa13531",
-              "puzzle_hash": "0x3f5ea6f0f46c1d76fbc72e4116895536f7b7b167f9d9e5a38d708ad3e3fd434a"
-            },
-            "puzzle_reveal": "0xff02ffff01ff02ffff01ff02ffff03ff0bffff01ff02ffff03ffff09ff05ffff1dff0bffff1effff0bff0bffff02ff06ffff04ff02ffff04ff17ff8080808080808080ffff01ff02ff17ff2f80ffff01ff088080ff0180ffff01ff04ffff04ff04ffff04ff05ffff04ffff02ff06ffff04ff02ffff04ff17ff80808080ff80808080ffff02ff17ff2f808080ff0180ffff04ffff01ff32ff02ffff03ffff07ff0580ffff01ff0bffff0102ffff02ff06ffff04ff02ffff04ff09ff80808080ffff02ff06ffff04ff02ffff04ff0dff8080808080ffff01ff0bffff0101ff058080ff0180ff018080ffff04ffff01b0a50a6518ead71676147c2ee69111eaf7ad247fc624f4ae8e7c2a7fdfd28c8a31560183506bfa9c657af220e0caacc378ff018080",
-            "solution": "0xff80ffff01ffff33ffa0eff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9ff0180ffff33ffa0dc2d295cce761abd4123d03e7135c670d6c0ad39ec4e66503cec336439e8a2fbff8609fd695a377a80ffff34ff8203e880ffff3cffa0b7fe85c45d675c4798e49b89c334dc345acdecb7955467e849c367b47495700e80ffff3dffa0cb7418c46c146ecf8515b5ec562c8d6884c6ff5a28daecfdb4a37301b3b92bb38080ff8080"
-          },
-          {
-            "coin": {
-              "amount": 1,
-              "parent_coin_info": "0x7a97a37cac145bd13b4da93c496dc32e83a526918727e0f6a1c305af996726e9",
-              "puzzle_hash": "0xeff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9"
-            },
-            "puzzle_reveal": "0xff02ffff01ff04ffff04ff04ffff04ff05ffff04ff0bff80808080ffff04ffff04ff0affff04ffff02ff0effff04ff02ffff04ffff04ff05ffff04ff0bffff04ff17ff80808080ff80808080ff808080ff808080ffff04ffff01ff33ff3cff02ffff03ffff07ff0580ffff01ff0bffff0102ffff02ff0effff04ff02ffff04ff09ff80808080ffff02ff0effff04ff02ffff04ff0dff8080808080ffff01ff0bffff0101ff058080ff0180ff018080",
-            "solution": "0xffa0ba017f832d945b23f7b0a3dc4850a3bb9aff6e92cd2a333a7987b60ced1dab0aff01ffffa00000000000000000000000000000000000000000000000000000000000000000ffa0a5927d1773b24c508abb547f7fb803c57841dc2ef85c3074707355830ddb1f7e8080"
-          }
-        ]
-      },
-      "to_puzzle_hash": "0x0202020202020202020202020202020202020202020202020202020202020202",
-      "trade_id": null,
-      "type": 0,
-      "wallet_id": 0
-    },
-    {
-      "additions": [
-        {
-          "amount": 1,
-          "parent_coin_info": "0x7a97a37cac145bd13b4da93c496dc32e83a526918727e0f6a1c305af996726e9",
-          "puzzle_hash": "0xeff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9"
-        },
-        {
-          "amount": 10983998895994,
-          "parent_coin_info": "0x7a97a37cac145bd13b4da93c496dc32e83a526918727e0f6a1c305af996726e9",
-          "puzzle_hash": "0xdc2d295cce761abd4123d03e7135c670d6c0ad39ec4e66503cec336439e8a2fb"
-        }
-      ],
-      "amount": 1,
-      "confirmed": false,
-      "confirmed_at_height": 0,
-      "created_at_time": 1660784389,
-      "fee_amount": 1000,
-      "memos": [],
-      "name": "0xa3128e387ecc892f9b4d7e0178ee3fab5620659b0dabcf34dd3305e0e10d221d",
-      "removals": [
-        {
-          "amount": 10983998896995,
-          "parent_coin_info": "0x110a907b5676553746e75623dd32ad231c080e9dabe50a99bc43beebaaa13531",
-          "puzzle_hash": "0x3f5ea6f0f46c1d76fbc72e4116895536f7b7b167f9d9e5a38d708ad3e3fd434a"
-        }
-      ],
-      "sent": 0,
-      "sent_to": [],
-      "spend_bundle": null,
-      "to_puzzle_hash": "0xeff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9",
-      "trade_id": null,
-      "type": 1,
-      "wallet_id": 1
-    }
-  ]
+  "success": true
 }
-```
-
-As a result of running the `create_data_store` command, a new DataLayer wallet is created:
-
-```json
-chia wallet show
-```
-
-Response:
-
-```json
-Wallet height: 1399892
-Sync status: Synced
-Balances, fingerprint: 1871575185
-
-Chia Wallet:
-   -Total Balance:         10.983998895994 txch (10983998895994 mojo)
-   -Pending Total Balance: 10.983998895994 txch (10983998895994 mojo)
-   -Spendable:             10.983998895994 txch (10983998895994 mojo)
-   -Type:                  STANDARD_WALLET
-   -Wallet ID:             1
-
-DataLayer Wallet:
-   -Total Balance:         0.0
-   -Pending Total Balance: 0.0
-   -Spendable:             0.0
-   -Type:                  DATA_LAYER
-   -Wallet ID:             2
 ```
 
 </details>
 
 ---
 
-### `get_owned_stores`
+### `add_missing_files`
 
-Functionality: List the id (`store_id`) of each data_store owned by this wallet
+Functionality: Use the database to restore all files for one or more owned data stores
 
-Usage: chia rpc data_layer [OPTIONS] get_owned_stores [REQUEST]
+Note: For subscribed stores, this command will do nothing. Use [unsubscribe](#unsubscribe) and [subscribe](#subscribe) instead
+
+Usage: chia rpc data_layer [OPTIONS] add_missing_files [REQUEST]
 
 Options:
 
@@ -232,24 +106,62 @@ Options:
 | -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
 | -h            | --help       | None     | False    | Show a help message and exit                                                          |
 
-Request Parameters: None
+Request Parameters:
+
+| Flag       | Type    | Required | Description                                                                                                                                  |
+| :--------- | :------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
+| ids        | TEXT    | False    | A list of hexadecimal store IDs to restore (default: all subscribed stores)                                                                  |
+| override   | BOOLEAN | False    | If `True`, will overwrite files that already exist (default: `False`)                                                                        |
+| foldername | TEXT    | False    | The name of the folder where the files to be restored are located (default: `~/.chia/mainnet/data_layer/db/server_files_location_<network>`) |
 
 <details>
 <summary>Example</summary>
 
+For this example, there is one owned store:
+
 ```json
-chia rpc data_layer get_owned_stores
+ls ~/.chia/mainnet/data_layer/db/server_files_location_testnet10/
+```
+
+Response:
+
+```
+1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e-b5420e65846ded936d1e4855c066247fc461a3b281cd9e0e69f3cfa4df529ba2-delta-1-v1.0.dat
+1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e-b5420e65846ded936d1e4855c066247fc461a3b281cd9e0e69f3cfa4df529ba2-full-1-v1.0.dat
+```
+
+Intentionally move the files and create an empty folder. This will simulate file corruption:
+
+```json
+mv ~/.chia/mainnet/data_layer/db/server_files_location_testnet10 ~/.chia/mainnet/data_layer/db/server_files_location_testnet10_bak
+mkdir ~/.chia/mainnet/data_layer/db/server_files_location_testnet10/
+```
+
+Next, restore the files:
+
+```json
+chia rpc data_layer add_missing_files
 ```
 
 Response:
 
 ```json
 {
-  "store_ids": [
-    "1163ac212bd5fe00efa86f8d3c4958cda08924870800d72dc332f508a1b2e35a"
-  ],
   "success": true
 }
+```
+
+Finally, verify that the files have been restored:
+
+```json
+ls ~/.chia/mainnet/data_layer/db/server_files_location_testnet10/
+```
+
+Response:
+
+```json
+1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e-b5420e65846ded936d1e4855c066247fc461a3b281cd9e0e69f3cfa4df529ba2-delta-1-v1.0.dat
+1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e-b5420e65846ded936d1e4855c066247fc461a3b281cd9e0e69f3cfa4df529ba2-full-1-v1.0.dat
 ```
 
 </details>
@@ -467,11 +379,11 @@ value = {
 
 ---
 
-### `get_value`
+### `cancel_offer`
 
-Functionality: Given a key and the data store in which the key is located, return corresponding value
+Functionality: Cancel a DataLayer offer
 
-Usage: chia rpc data_layer [OPTIONS] get_value [REQUEST]
+Usage: chia rpc data_layer [OPTIONS] cancel_offer [REQUEST]
 
 Options:
 
@@ -482,16 +394,314 @@ Options:
 
 Request Parameters:
 
-| Flag | Type | Required | Description              |
-| :--- | :--- | :------- | :----------------------- |
-| id   | TEXT | True     | The hexadecimal store ID |
-| key  | TEXT | True     | The hexadecimal key      |
+| Flag     | Type    | Required | Description                                                                                                                                                                                                                                                             |
+| :------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| trade_id | TEXT    | True     | The `trade_id` of the offer. This is displayed with the response of the [make_offer](#make_offer) RPC                                                                                                                                                                   |
+| secure   | BOOLEAN | True     | If `true`, the offer will be canceled on the blockchain, making it impossible to be accepted later. If `false`, the offer will only be canceled locally. We recommend that you set this to `true` unless you are certain that the offer file has not left your computer |
+| fee      | TEXT    | False    | If `secure` is `true`, this will set the fee for the transaction, in mojos. If `secure` is `false`, the fee will be ignored                                                                                                                                             |
+
+<details>
+<summary>Example </summary>
+
+Cancel an offer on-chain, using "secure":"true":
+
+```json
+chia rpc data_layer cancel_offer '{"trade_id":"92652561cc3f40677d7d73513b4dde4a56da1c9edc0cfd9f03bb001b95df42af", "secure":"true", "fee":"1000"}'
+```
+
+Response:
+
+```json
+{
+  "success": true
+}
+```
+
+</details>
+
+---
+
+### `check_plugins`
+
+Functionality: Get information about configured uploader/downloader plugins
+
+Usage: chia rpc data_layer [OPTIONS] check_plugins [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters: None
+
+<details>
+<summary>Example </summary>
+
+```json
+chia rpc data_layer check_plugins
+```
+
+Response:
+
+```json
+{
+  "plugin_status": {
+    "downloaders": {},
+    "uploaders": {}
+  },
+  "success": true
+}
+```
+
+</details>
+
+---
+
+### `clear_pending_roots`
+
+Functionality: Clear pending roots that will not be published, associated data may not be recoverable
+
+Usage: chia rpc data_layer [OPTIONS] clear_pending_roots [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters:
+
+| Flag     | Type | Required | Description              |
+| :------- | :--- | :------- | :----------------------- |
+| store_id | TEXT | True     | The hexadecimal store ID |
 
 <details>
 <summary>Example</summary>
 
 ```json
-chia rpc data_layer get_value '{"id":"0x1163ac212bd5fe00efa86f8d3c4958cda08924870800d72dc332f508a1b2e35a", "key":"0005"}'
+chia rpc data_layer clear_pending_roots '{"store_id":"2772c8108e19f9fa98ff7bc7d4bafd821319bc90af6b610d086b85f4c21fa816"}'
+```
+
+Response:
+
+```json
+{
+    "root": {
+        "generation": 2,
+        "node_hash": "ab8da7d5adec29fe1d12888fec462d0b18d72cec975599e178f98037cf3b8d13",
+        "status": 1,
+        "tree_id": "2772c8108e19f9fa98ff7bc7d4bafd821319bc90af6b610d086b85f4c21fa816"
+    },
+    "success": true
+}
+```
+
+</details>
+
+---
+
+### `create_data_store`
+
+Functionality: Create a data store. Triggers a Chia transaction
+
+Usage: chia rpc data_layer [OPTIONS] create_data_store [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters:
+
+| Flag | Type | Required | Description                               |
+| :--- | :--- | :------- | :---------------------------------------- |
+| fee  | TEXT | False    | Set the fee for the transaction, in mojos |
+
+<details>
+<summary>Example</summary>
+
+```json
+chia rpc data_layer create_data_store '{"fee":"1000"}'
+```
+
+Response:
+
+```json
+{
+  "id": "31264f736a07683097a4b1bbedfa3b4d12631af1595b3905907a441bafb79c61",
+  "success": true,
+  "txs": [
+    {
+      "additions": [
+        {
+          "amount": 1,
+          "parent_coin_info": "0x7a97a37cac145bd13b4da93c496dc32e83a526918727e0f6a1c305af996726e9",
+          "puzzle_hash": "0xeff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9"
+        },
+        {
+          "amount": 10983998895994,
+          "parent_coin_info": "0x7a97a37cac145bd13b4da93c496dc32e83a526918727e0f6a1c305af996726e9",
+          "puzzle_hash": "0xdc2d295cce761abd4123d03e7135c670d6c0ad39ec4e66503cec336439e8a2fb"
+        },
+        {
+          "amount": 1,
+          "parent_coin_info": "0x31264f736a07683097a4b1bbedfa3b4d12631af1595b3905907a441bafb79c61",
+          "puzzle_hash": "0xba017f832d945b23f7b0a3dc4850a3bb9aff6e92cd2a333a7987b60ced1dab0a"
+        }
+      ],
+      "amount": 1,
+      "confirmed": false,
+      "confirmed_at_height": 0,
+      "created_at_time": 1660784389,
+      "fee_amount": 1000,
+      "memos": [],
+      "name": "0x76d1e179a15f097c116e75c73486c3d47f7ebbb4791b5216a2828807f4ad9a5f",
+      "removals": [
+        {
+          "amount": 10983998896995,
+          "parent_coin_info": "0x110a907b5676553746e75623dd32ad231c080e9dabe50a99bc43beebaaa13531",
+          "puzzle_hash": "0x3f5ea6f0f46c1d76fbc72e4116895536f7b7b167f9d9e5a38d708ad3e3fd434a"
+        },
+        {
+          "amount": 1,
+          "parent_coin_info": "0x7a97a37cac145bd13b4da93c496dc32e83a526918727e0f6a1c305af996726e9",
+          "puzzle_hash": "0xeff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9"
+        }
+      ],
+      "sent": 10,
+      "sent_to": [],
+      "spend_bundle": {
+        "aggregated_signature": "0xb600c2cd9ddafb6655e14fe99b293a742746ba82ef3f05b8bb3a375af0d3824011a1909348a16745e19f826aceb2534e08c0d939f01eb92f9bfac5eb8cf0c97bad353d5e0fa89f95f329c45c5797d59fe4b1a8ce23fa6a64bd2ac385170fedd5",
+        "coin_spends": [
+          {
+            "coin": {
+              "amount": 10983998896995,
+              "parent_coin_info": "0x110a907b5676553746e75623dd32ad231c080e9dabe50a99bc43beebaaa13531",
+              "puzzle_hash": "0x3f5ea6f0f46c1d76fbc72e4116895536f7b7b167f9d9e5a38d708ad3e3fd434a"
+            },
+            "puzzle_reveal": "0xff02ffff01ff02ffff01ff02ffff03ff0bffff01ff02ffff03ffff09ff05ffff1dff0bffff1effff0bff0bffff02ff06ffff04ff02ffff04ff17ff8080808080808080ffff01ff02ff17ff2f80ffff01ff088080ff0180ffff01ff04ffff04ff04ffff04ff05ffff04ffff02ff06ffff04ff02ffff04ff17ff80808080ff80808080ffff02ff17ff2f808080ff0180ffff04ffff01ff32ff02ffff03ffff07ff0580ffff01ff0bffff0102ffff02ff06ffff04ff02ffff04ff09ff80808080ffff02ff06ffff04ff02ffff04ff0dff8080808080ffff01ff0bffff0101ff058080ff0180ff018080ffff04ffff01b0a50a6518ead71676147c2ee69111eaf7ad247fc624f4ae8e7c2a7fdfd28c8a31560183506bfa9c657af220e0caacc378ff018080",
+            "solution": "0xff80ffff01ffff33ffa0eff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9ff0180ffff33ffa0dc2d295cce761abd4123d03e7135c670d6c0ad39ec4e66503cec336439e8a2fbff8609fd695a377a80ffff34ff8203e880ffff3cffa0b7fe85c45d675c4798e49b89c334dc345acdecb7955467e849c367b47495700e80ffff3dffa0cb7418c46c146ecf8515b5ec562c8d6884c6ff5a28daecfdb4a37301b3b92bb38080ff8080"
+          },
+          {
+            "coin": {
+              "amount": 1,
+              "parent_coin_info": "0x7a97a37cac145bd13b4da93c496dc32e83a526918727e0f6a1c305af996726e9",
+              "puzzle_hash": "0xeff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9"
+            },
+            "puzzle_reveal": "0xff02ffff01ff04ffff04ff04ffff04ff05ffff04ff0bff80808080ffff04ffff04ff0affff04ffff02ff0effff04ff02ffff04ffff04ff05ffff04ff0bffff04ff17ff80808080ff80808080ff808080ff808080ffff04ffff01ff33ff3cff02ffff03ffff07ff0580ffff01ff0bffff0102ffff02ff0effff04ff02ffff04ff09ff80808080ffff02ff0effff04ff02ffff04ff0dff8080808080ffff01ff0bffff0101ff058080ff0180ff018080",
+            "solution": "0xffa0ba017f832d945b23f7b0a3dc4850a3bb9aff6e92cd2a333a7987b60ced1dab0aff01ffffa00000000000000000000000000000000000000000000000000000000000000000ffa0a5927d1773b24c508abb547f7fb803c57841dc2ef85c3074707355830ddb1f7e8080"
+          }
+        ]
+      },
+      "to_puzzle_hash": "0x0202020202020202020202020202020202020202020202020202020202020202",
+      "trade_id": null,
+      "type": 0,
+      "wallet_id": 0
+    },
+    {
+      "additions": [
+        {
+          "amount": 1,
+          "parent_coin_info": "0x7a97a37cac145bd13b4da93c496dc32e83a526918727e0f6a1c305af996726e9",
+          "puzzle_hash": "0xeff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9"
+        },
+        {
+          "amount": 10983998895994,
+          "parent_coin_info": "0x7a97a37cac145bd13b4da93c496dc32e83a526918727e0f6a1c305af996726e9",
+          "puzzle_hash": "0xdc2d295cce761abd4123d03e7135c670d6c0ad39ec4e66503cec336439e8a2fb"
+        }
+      ],
+      "amount": 1,
+      "confirmed": false,
+      "confirmed_at_height": 0,
+      "created_at_time": 1660784389,
+      "fee_amount": 1000,
+      "memos": [],
+      "name": "0xa3128e387ecc892f9b4d7e0178ee3fab5620659b0dabcf34dd3305e0e10d221d",
+      "removals": [
+        {
+          "amount": 10983998896995,
+          "parent_coin_info": "0x110a907b5676553746e75623dd32ad231c080e9dabe50a99bc43beebaaa13531",
+          "puzzle_hash": "0x3f5ea6f0f46c1d76fbc72e4116895536f7b7b167f9d9e5a38d708ad3e3fd434a"
+        }
+      ],
+      "sent": 0,
+      "sent_to": [],
+      "spend_bundle": null,
+      "to_puzzle_hash": "0xeff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9",
+      "trade_id": null,
+      "type": 1,
+      "wallet_id": 1
+    }
+  ]
+}
+```
+
+As a result of running the `create_data_store` command, a new DataLayer wallet is created:
+
+```json
+chia wallet show
+```
+
+Response:
+
+```json
+Wallet height: 1399892
+Sync status: Synced
+Balances, fingerprint: 1871575185
+
+Chia Wallet:
+   -Total Balance:         10.983998895994 txch (10983998895994 mojo)
+   -Pending Total Balance: 10.983998895994 txch (10983998895994 mojo)
+   -Spendable:             10.983998895994 txch (10983998895994 mojo)
+   -Type:                  STANDARD_WALLET
+   -Wallet ID:             1
+
+DataLayer Wallet:
+   -Total Balance:         0.0
+   -Pending Total Balance: 0.0
+   -Spendable:             0.0
+   -Type:                  DATA_LAYER
+   -Wallet ID:             2
+```
+
+</details>
+
+---
+
+### `delete_key`
+
+Functionality: Delete a key/value pair from a store that you control. Triggers a Chia transaction
+
+Usage: chia rpc data_layer [OPTIONS] delete_key [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters:
+
+| Flag | Type | Required | Description                               |
+| :--- | :--- | :------- | :---------------------------------------- |
+| id   | TEXT | True     | The hexadecimal store ID                  |
+| key  | TEXT | True     | The hexadecimal key                       |
+| fee  | TEXT | False    | Set the fee for the transaction, in mojos |
+
+Example:
+
+<details>
+<summary>Example</summary>
+
+```json
+chia rpc data_layer delete_key '{"id":"0x1163ac212bd5fe00efa86f8d3c4958cda08924870800d72dc332f508a1b2e35a", "key":"0001", "fee":"100000"}'
 ```
 
 Response:
@@ -499,7 +709,7 @@ Response:
 ```json
 {
   "success": true,
-  "value": "beadfeed"
+  "tx_id": "0x6cfbaff3f739f4b0e1d0fae3475966f0d4a19b8a89b483af1bf1cdc789bb9f3c"
 }
 ```
 
@@ -507,11 +717,11 @@ Response:
 
 ---
 
-### `get_keys`
+### `delete_mirror`
 
-Functionality: Get all keys associated with a store_id
+Functionality: Delete a mirror, by `coin_id`. Triggers a Chia transaction
 
-Usage: chia rpc data_layer [OPTIONS] get_keys [REQUEST]
+Usage: chia rpc data_layer [OPTIONS] delete_mirror [REQUEST]
 
 Options:
 
@@ -522,76 +732,41 @@ Options:
 
 Request Parameters:
 
-| Flag | Type | Required | Description              |
-| :--- | :--- | :------- | :----------------------- |
-| id   | TEXT | True     | The hexadecimal store ID |
+| Flag | Type | Required | Description                                                                              |
+| :--- | :--- | :------- | :--------------------------------------------------------------------------------------- |
+| id   | TEXT | True     | The `coin_id` of the mirror to delete, obtainable by running [get_mirrors](#get_mirrors) |
+| fee  | TEXT | False    | Set the fee for the transaction, in mojos                                                |
 
 <details>
-<summary>Example</summary>
+<summary>Example 1</summary>
 
 ```json
-chia rpc data_layer get_keys '{"id":"0x1163ac212bd5fe00efa86f8d3c4958cda08924870800d72dc332f508a1b2e35a"}'
+chia rpc data_layer delete_mirror '{"id":"0x9a2132858b81907875a65123e592b7aea80b23724202ac21bba0aedf583f7427"}'
 ```
 
 Response:
 
 ```json
 {
-  "keys": ["0x0002", "0x0001"],
   "success": true
 }
 ```
 
 </details>
 
----
-
-### `get_keys_values`
-
-Functionality: Get all keys and values for a store. Must be subscribed to store ID
-
-Usage: chia rpc data_layer [OPTIONS] get_keys_values [REQUEST]
-
-Options:
-
-| Short Command | Long Command | Type     | Required | Description                                                                           |
-| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
-| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
-| -h            | --help       | None     | False    | Show a help message and exit                                                          |
-
-Request Parameters:
-
-| Flag | Type | Required | Description              |
-| :--: | :--: | :------: | :----------------------- |
-|  id  | TEXT |   True   | The hexadecimal store ID |
-
 <details>
-<summary>Example</summary>
+<summary>Example 2</summary>
+
+If you attempt to delete a mirror you did not create, this will fail:
 
 ```json
-chia rpc data_layer get_keys_values '{"id":"0x1163ac212bd5fe00efa86f8d3c4958cda08924870800d72dc332f508a1b2e35a"}'
+chia rpc data_layer delete_mirror '{"id":"0x83a75913f8222eebfbc047d2ab3bf4b92bd5c37f3acaa336a0bb8b3b3168c879"}'
 ```
 
 Response:
 
 ```json
-{
-  "keys_values": [
-    {
-      "atom": null,
-      "hash": "0xa03d7ea8e488d6443f51a8b586f11754447fb449dc48af881ee78ff77ec7cdb1",
-      "key": "0x0001",
-      "value": "0xfadedcab"
-    },
-    {
-      "atom": null,
-      "hash": "0x919735911d7f9ca0de316878ddb92e7772c9f39bf9d37e9d84ccab39f5d49a11",
-      "key": "0x0002",
-      "value": "0xcafef00d"
-    }
-  ],
-  "success": true
-}
+Request failed: {'error': "{'error': 'DL Wallet does not have permission to delete mirror with ID 83a75913f8222eebfbc047d2ab3bf4b92bd5c37f3acaa336a0bb8b3b3168c879', 'success': False}", 'success': False}
 ```
 
 </details>
@@ -657,11 +832,11 @@ Response:
 
 ---
 
-### `get_root`
+### `get_keys`
 
-Functionality: Get the root hash and timestamp of a given store ID. If the store is remote, this command will return an invalid hash (see example). In this case, use [get_local_root](#get_local_root) instead
+Functionality: Get all keys associated with a store_id
 
-Usage: chia rpc data_layer [OPTIONS] get_root [REQUEST]
+Usage: chia rpc data_layer [OPTIONS] get_keys [REQUEST]
 
 Options:
 
@@ -672,87 +847,32 @@ Options:
 
 Request Parameters:
 
-| Flag | Type | Required | Description              |
-| :--- | :--- | :------- | :----------------------- |
-| id   | TEXT | True     | The hexadecimal store ID |
+| Flag      | Type | Required | Description                             |
+| :-------- | :--- | :------- | :-------------------------------------- |
+| id        | TEXT | True     | The hexadecimal store ID                |
+| root_hash | TEXT | False    | The root hash from which to obtain data |
 
-<details>
-<summary>Example 1</summary>
+:::info
 
-Get the root hash of a local store:
+The `root_hash` parameter is recommended to be used each time you call this RPC.
+If `root_hash` is not specified, there is no way to guarantee that the latest data is being shown
+(stale data may be shown instead).
+This parameter is obtainable by calling the [get_root](#get_root) RPC.
 
-```json
-chia rpc data_layer get_root '{"id":"0x1163ac212bd5fe00efa86f8d3c4958cda08924870800d72dc332f508a1b2e35a"}'
-```
-
-Response:
-
-```json
-{
-  "confirmed": true,
-  "hash": "0x75cccd7342e93b5a716877c285282f45b1125c33d3f67cd62a353efdbe4fd9fa",
-  "success": true,
-  "timestamp": 1660623078
-}
-```
-
-</details>
-
-<details>
-<summary>Example 2</summary>
-
-Get the root hash of a remote store. Notice that an invalid hash is shown:
-
-```json
-chia rpc data_layer get_root '{"id":"8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d"}'
-```
-
-Response:
-
-```json
-{
-  "confirmed": true,
-  "hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "success": true,
-  "timestamp": 1660672031
-}
-```
-
-</details>
-
----
-
-### `get_local_root`
-
-Functionality: Get the root hash and timestamp of a store ID. Can be used for either local or remote stores
-
-Usage: chia rpc data_layer [OPTIONS] get_local_root [REQUEST]
-
-Options:
-
-| Short Command | Long Command | Type     | Required | Description                                                                           |
-| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
-| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
-| -h            | --help       | None     | False    | Show a help message and exit                                                          |
-
-Request Parameters:s
-
-| Flag | Type | Required | Description              |
-| :--- | :--- | :------- | :----------------------- |
-| id   | TEXT | True     | The hexadecimal store ID |
+:::
 
 <details>
 <summary>Example</summary>
 
 ```json
-chia rpc data_layer get_local_root '{"id":"8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d"}'
+chia rpc data_layer get_keys '{"id":"0x8f9601eba73a276d5b9e12fbec52b113217e89a55831ae1d80bca48462fbaea7", "root_hash": "0x9527cc5e43bf93062423221e9bec761cbc3f24a0811cb0738da2419dfe7649f7"}'
 ```
 
 Response:
 
 ```json
 {
-  "hash": "0xcdb172490d2d1838e7cca24e28e2089ccbacf0e03b0f3d0a61eedae8462b3e75",
+  "keys": ["0x0001", "0x0002", "0x0003"],
   "success": true
 }
 ```
@@ -761,11 +881,11 @@ Response:
 
 ---
 
-### `get_roots`
+### `get_keys_values`
 
-Functionality: Get the root hashes and timestamps from a list of stores. Note that an invalid hash will be returned for remote stores. Use [get_local_root](#get_local_root) instead
+Functionality: Get all keys and values for a store. Must be subscribed to store ID
 
-Usage: chia rpc data_layer [OPTIONS] get_roots [REQUEST]
+Usage: chia rpc data_layer [OPTIONS] get_keys_values [REQUEST]
 
 Options:
 
@@ -776,401 +896,104 @@ Options:
 
 Request Parameters:
 
-| Flag | Type | Required | Description                     |
-| :--- | :--- | :------- | :------------------------------ |
-| ids  | TEXT | True     | A list of hexadecimal store IDs |
+|   Flag    | Type | Required | Description                             |
+| :-------: | :--: | :------: | :-------------------------------------- |
+|    id     | TEXT |   True   | The hexadecimal store ID                |
+| root_hash | TEXT |  False   | The root hash from which to obtain data |
+
+:::info
+
+The `root_hash` parameter is recommended to be used each time you call this RPC.
+If `root_hash` is not specified, there is no way to guarantee that the latest data is being shown
+(stale data may be shown instead).
+This parameter is obtainable by calling the [get_root](#get_root) RPC.
+
+:::
 
 <details>
 <summary>Example</summary>
 
-For this example, the first store is remote, so it will return an invalid root hash. The second store is local, so the root hash will be valid:
+First, we'll show show an example that does not specify the root hash.
+This will result in stale data being displayed, per the above message.
+
+**Note: omitting the `root_hash` is not recommended.**
+Later, we will show the recommended way to call this RPC.
 
 ```json
-chia rpc data_layer get_roots '{"ids":["8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d", "0x1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e"]}'
+chia rpc data_layer get_keys_values '{"id":"0x8f9601eba73a276d5b9e12fbec52b113217e89a55831ae1d80bca48462fbaea7"}'
 ```
 
 Response:
 
 ```json
 {
-  "root_hashes": [
+  "keys_values": [
     {
-      "confirmed": true,
-      "hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-      "id": "0x8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d",
-      "timestamp": 1660672031
+      "atom": null,
+      "hash": "0xa03d7ea8e488d6443f51a8b586f11754447fb449dc48af881ee78ff77ec7cdb1",
+      "key": "0x0001",
+      "value": "0xfadedcab"
     },
     {
-      "confirmed": true,
-      "hash": "0xb5420e65846ded936d1e4855c066247fc461a3b281cd9e0e69f3cfa4df529ba2",
-      "id": "0x1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e",
-      "timestamp": 1660724174
+      "atom": null,
+      "hash": "0x919735911d7f9ca0de316878ddb92e7772c9f39bf9d37e9d84ccab39f5d49a11",
+      "key": "0x0002",
+      "value": "0xcafef00d"
     }
   ],
   "success": true
 }
 ```
 
-</details>
-
----
-
-### `delete_key`
-
-Functionality: Delete a key/value pair from a store that you control. Triggers a Chia transaction
-
-Usage: chia rpc data_layer [OPTIONS] delete_key [REQUEST]
-
-Options:
-
-| Short Command | Long Command | Type     | Required | Description                                                                           |
-| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
-| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
-| -h            | --help       | None     | False    | Show a help message and exit                                                          |
-
-Request Parameters:
-
-| Flag | Type | Required | Description                               |
-| :--- | :--- | :------- | :---------------------------------------- |
-| id   | TEXT | True     | The hexadecimal store ID                  |
-| key  | TEXT | True     | The hexadecimal key                       |
-| fee  | TEXT | False    | Set the fee for the transaction, in mojos |
-
-Example:
-
-<details>
-<summary>Example</summary>
+Next, we will obtain the latest `root_hash` value:
 
 ```json
-chia rpc data_layer delete_key '{"id":"0x1163ac212bd5fe00efa86f8d3c4958cda08924870800d72dc332f508a1b2e35a", "key":"0001", "fee":"100000"}'
+chia rpc data_layer get_root '{"id":"0x8f9601eba73a276d5b9e12fbec52b113217e89a55831ae1d80bca48462fbaea7"}'
 ```
 
 Response:
 
 ```json
 {
+  "confirmed": true,
+  "hash": "0x9527cc5e43bf93062423221e9bec761cbc3f24a0811cb0738da2419dfe7649f7",
   "success": true,
-  "tx_id": "0x6cfbaff3f739f4b0e1d0fae3475966f0d4a19b8a89b483af1bf1cdc789bb9f3c"
+  "timestamp": 1679023336
 }
 ```
 
-</details>
-
----
-
-### `insert`
-
-Functionality: Insert a key/value pair into a store that you control. Triggers a Chia transaction
-
-Usage: chia rpc data_layer [OPTIONS] insert [REQUEST]
-
-Options:
-
-| Short Command | Long Command | Type     | Required | Description                                                                           |
-| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
-| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
-| -h            | --help       | None     | False    | Show a help message and exit                                                          |
-
-Request Parameters:
-
-| Flag  | Type | Required | Description                               |
-| :---- | :--- | :------- | :---------------------------------------- |
-| id    | TEXT | True     | The hexadecimal store ID                  |
-| key   | TEXT | True     | The hexadecimal key                       |
-| value | TEXT | True     | The hexadecimal value                     |
-| fee   | TEXT | False    | Set the fee for the transaction, in mojos |
-
-<details>
-<summary>Example 1</summary>
-
-This example will create a key/value pair without `0x` prefixing:
+Finally, we will call the RPC again, this time with the latest `root_hash`:
 
 ```json
-chia rpc data_layer insert '{"id":"1163ac212bd5fe00efa86f8d3c4958cda08924870800d72dc332f508a1b2e35a", "key":"0001", "value":"fadedcab"}'
+chia rpc data_layer get_keys_values '{"id":"0x8f9601eba73a276d5b9e12fbec52b113217e89a55831ae1d80bca48462fbaea7", "root_hash": "0x9527cc5e43bf93062423221e9bec761cbc3f24a0811cb0738da2419dfe7649f7"}'
 ```
 
-Response:
+The result now contains all of theys anf values from the `id`:
 
 ```json
 {
-  "success": true,
-  "tx_id": "0xaba9c1a25199acc8e05557527cfe683797b1c8b81d6011cdbb03f80f900febd2"
-}
-```
-
-</details>
-
-<details>
-<summary>Example 2</summary>
-
-This example will create a key/value pair with `0x` prefixing:
-
-```json
-chia rpc data_layer insert '{"id":"0x1163ac212bd5fe00efa86f8d3c4958cda08924870800d72dc332f508a1b2e35a", "key":"0x0002", "value":"0xcafef00d"}'
-```
-
-Response:
-
-```json
-{
-  "success": true,
-  "tx_id": "0x212092519e5edce613d12b663bc9fa71c2d8f54da2c04ee5d5526cee0df84440"
-}
-```
-
-</details>
-
----
-
-### `subscribe`
-
-Functionality: Subscribe to a store ID
-
-Usage: chia rpc data_layer [OPTIONS] subscribe [REQUEST]
-
-Options:
-
-| Short Command | Long Command | Type     | Required | Description                                                                           |
-| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
-| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
-| -h            | --help       | None     | False    | Show a help message and exit                                                          |
-
-Request Parameters:
-
-| Flag | Type | Required | Description                                                              |
-| :--- | :--- | :------- | :----------------------------------------------------------------------- |
-| id   | TEXT | True     | The hexadecimal store ID                                                 |
-| urls | TEXT | True     | A list of URLs where the data store resides. This list can be left blank |
-
-<details>
-<summary>Example 1</summary>
-
-Subscribe to a data store without specifying any URLs:
-
-```json
-chia rpc data_layer subscribe '{"id":"8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d", "urls":[]}'
-```
-
-Response:
-
-```json
-{
-  "success": true
-}
-```
-
-</details>
-
-<details>
-<summary>Example 2</summary>
-
-Subscribe to a data store using multiple URLs where that store resides:
-
-```json
-chia rpc data_layer subscribe '{"id":"8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d", "urls":["http://www.example.com:8575", "http://www.example2.com:8575"]}'
-```
-
-Response:
-
-```json
-{
-  "success": true
-}
-```
-
-</details>
-
----
-
-### `unsubscribe`
-
-Functionality: Unsubscribe from a store ID
-
-Usage: chia rpc data_layer [OPTIONS] unsubscribe [REQUEST]
-
-Options:
-
-| Short Command | Long Command | Type     | Required | Description                                                                           |
-| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
-| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
-| -h            | --help       | None     | False    | Show a help message and exit                                                          |
-
-Request Parameters:
-
-| Flag | Type | Required | Description                                               |
-| :--- | :--- | :------- | :-------------------------------------------------------- |
-| id   | TEXT | True     | The hexadecimal ID of the store from which to unsubscribe |
-
-<details>
-<summary>Example</summary>
-
-```json
-chia rpc data_layer unsubscribe '{"id":"8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d"}'
-```
-
-Response:
-
-```json
-{
-  "success": true
-}
-```
-
-</details>
-
----
-
-### `subscriptions`
-
-Functionality: List the store ID for each current subscription
-
-Usage: chia rpc data_layer [OPTIONS] subscriptions [REQUEST]
-
-Options:
-
-| Short Command | Long Command | Type     | Required | Description                                                                           |
-| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
-| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
-| -h            | --help       | None     | False    | Show a help message and exit                                                          |
-
-Request Parameters: None
-
-<details>
-<summary>Example</summary>
-
-```json
-chia rpc data_layer subscriptions
-```
-
-Response:
-
-```json
-{
-  "store_ids": [
-    "9166b9bed97e0ce9b5d79564e8dba2975ae0637994e8908a31aaddd7a29bfb90",
-    "a4a9a945a7511911aeaaefc9e6627831b1c30b1919c92c738592923f30fe3735",
-    "550386f956c9932210c38c674e42dca9db9655b8155069540feaac91833c664b",
-    "1163ac212bd5fe00efa86f8d3c4958cda08924870800d72dc332f508a1b2e35a",
-    "8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d"
+  "keys_values": [
+    {
+      "atom": null,
+      "hash": "0xa03d7ea8e488d6443f51a8b586f11754447fb449dc48af881ee78ff77ec7cdb1",
+      "key": "0x0001",
+      "value": "0xfadedcab"
+    },
+    {
+      "atom": null,
+      "hash": "0x919735911d7f9ca0de316878ddb92e7772c9f39bf9d37e9d84ccab39f5d49a11",
+      "key": "0x0002",
+      "value": "0xcafef00d"
+    },
+    {
+      "atom": null,
+      "hash": "0xe488fa1bf0f712b224df0daf312b3d479f80e3a330d4bebd8f26a0d52dc0ebbb",
+      "key": "0x0003",
+      "value": "0xabc123"
+    }
   ],
   "success": true
 }
-```
-
-</details>
-
----
-
-### `remove_subscriptions`
-
-Functionality: Remove one or more URLs from a data store to which you subscribe. Note that this action will not remove the subscription to the data store itself. For that functionality, use [unsubscribe](#unsubscribe)
-
-Usage: chia rpc data_layer [OPTIONS] remove_subscriptions [REQUEST]
-
-Options:
-
-| Short Command | Long Command | Type     | Required | Description                                                                           |
-| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
-| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
-| -h            | --help       | None     | False    | Show a help message and exit                                                          |
-
-Request Parameters:
-
-| Flag | Type | Required | Description                              |
-| :--- | :--- | :------- | :--------------------------------------- |
-| id   | TEXT | True     | The hexadecimal store ID                 |
-| urls | TEXT | True     | A list of URLs from which to unsubscribe |
-
-<details>
-<summary>Example</summary>
-
-```json
-chia rpc data_layer remove_subscriptions '{"id":"8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d", "urls":["http://www.example.com:8575"]}'
-```
-
-Response:
-
-```json
-{
-  "success": true
-}
-```
-
-</details>
-
----
-
-### `add_missing_files`
-
-Functionality: Use the database to restore all files for one or more local data stores
-
-Note: For remote stores, this command will do nothing. Use [unsubscribe](#unsubscribe) and [subscribe](#subscribe) instead
-
-Usage: chia rpc data_layer [OPTIONS] add_missing_files [REQUEST]
-
-Options:
-
-| Short Command | Long Command | Type     | Required | Description                                                                           |
-| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
-| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
-| -h            | --help       | None     | False    | Show a help message and exit                                                          |
-
-Request Parameters:
-
-| Flag       | Type    | Required | Description                                                                                                                                  |
-| :--------- | :------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
-| ids        | TEXT    | False    | A list of hexadecimal store IDs to restore (default: all subscribed local stores)                                                            |
-| override   | BOOLEAN | False    | If `True`, will overwrite files that already exist (default: `False`)                                                                        |
-| foldername | TEXT    | False    | The name of the folder where the files to be restored are located (default: `~/.chia/mainnet/data_layer/db/server_files_location_<network>`) |
-
-<details>
-<summary>Example</summary>
-
-For this example, there is one local store:
-
-```json
-ls ~/.chia/mainnet/data_layer/db/server_files_location_testnet10/
-```
-
-Response:
-
-```
-1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e-b5420e65846ded936d1e4855c066247fc461a3b281cd9e0e69f3cfa4df529ba2-delta-1-v1.0.dat
-1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e-b5420e65846ded936d1e4855c066247fc461a3b281cd9e0e69f3cfa4df529ba2-full-1-v1.0.dat
-```
-
-Intentionally move the files and create an empty folder. This will simulate file corruption:
-
-```json
-mv ~/.chia/mainnet/data_layer/db/server_files_location_testnet10 ~/.chia/mainnet/data_layer/db/server_files_location_testnet10_bak
-mkdir ~/.chia/mainnet/data_layer/db/server_files_location_testnet10/
-```
-
-Next, restore the files:
-
-```json
-chia rpc data_layer add_missing_files
-```
-
-Response:
-
-```json
-{
-  "success": true
-}
-```
-
-Finally, verify that the files have been restored:
-
-```json
-ls ~/.chia/mainnet/data_layer/db/server_files_location_testnet10/
-```
-
-Response:
-
-```json
-1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e-b5420e65846ded936d1e4855c066247fc461a3b281cd9e0e69f3cfa4df529ba2-delta-1-v1.0.dat
-1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e-b5420e65846ded936d1e4855c066247fc461a3b281cd9e0e69f3cfa4df529ba2-full-1-v1.0.dat
 ```
 
 </details>
@@ -1219,6 +1042,248 @@ Response:
       "key": "0002",
       "type": "INSERT",
       "value": "0123456789abcdef"
+    }
+  ],
+  "success": true
+}
+```
+
+</details>
+
+---
+
+### `get_local_root`
+
+Functionality: Get the root hash and timestamp of a store ID. Can be used for either owned or subscribed stores
+
+Usage: chia rpc data_layer [OPTIONS] get_local_root [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters:s
+
+| Flag | Type | Required | Description              |
+| :--- | :--- | :------- | :----------------------- |
+| id   | TEXT | True     | The hexadecimal store ID |
+
+<details>
+<summary>Example</summary>
+
+```json
+chia rpc data_layer get_local_root '{"id":"8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d"}'
+```
+
+Response:
+
+```json
+{
+  "hash": "0xcdb172490d2d1838e7cca24e28e2089ccbacf0e03b0f3d0a61eedae8462b3e75",
+  "success": true
+}
+```
+
+</details>
+
+---
+
+### `get_mirrors`
+
+Functionality: List all mirrors for a store ID
+
+Usage: chia rpc data_layer [OPTIONS] get_mirrors [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters:
+
+| Flag | Type | Required | Description                                               |
+| :--- | :--- | :------- | :-------------------------------------------------------- |
+| id   | TEXT | True     | The hexadecimal ID of the store for which to list mirrors |
+
+<details>
+<summary>Example</summary>
+
+```json
+chia rpc data_layer get_mirrors '{"id":"0x1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e"}'
+```
+
+Response:
+
+```json
+{
+  "mirrors": [
+    {
+      "amount": 1000000,
+      "coin_id": "11f450c2f706cda88b3373855b3780d36822a7f0e94297eb88de7c63eb0bd4c7",
+      "launcher_id": "1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e",
+      "ours": true,
+      "urls": ["http://www.example.com:8575", "http://www.example2.com:8575"]
+    }
+  ],
+  "success": true
+}
+```
+
+</details>
+
+---
+
+### `get_owned_stores`
+
+Functionality: List the id (`store_id`) of each data_store owned by this wallet
+
+Usage: chia rpc data_layer [OPTIONS] get_owned_stores [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters: None
+
+<details>
+<summary>Example</summary>
+
+```json
+chia rpc data_layer get_owned_stores
+```
+
+Response:
+
+```json
+{
+  "store_ids": [
+    "1163ac212bd5fe00efa86f8d3c4958cda08924870800d72dc332f508a1b2e35a"
+  ],
+  "success": true
+}
+```
+
+</details>
+
+---
+
+### `get_root`
+
+Functionality: Get the root hash and timestamp of a given store ID. If it is a subscribed store, this command will return an invalid hash (see example). In this case, use [get_local_root](#get_local_root) instead
+
+Usage: chia rpc data_layer [OPTIONS] get_root [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters:
+
+| Flag | Type | Required | Description              |
+| :--- | :--- | :------- | :----------------------- |
+| id   | TEXT | True     | The hexadecimal store ID |
+
+<details>
+<summary>Example 1</summary>
+
+Get the root hash of an owned store:
+
+```json
+chia rpc data_layer get_root '{"id":"0x1163ac212bd5fe00efa86f8d3c4958cda08924870800d72dc332f508a1b2e35a"}'
+```
+
+Response:
+
+```json
+{
+  "confirmed": true,
+  "hash": "0x75cccd7342e93b5a716877c285282f45b1125c33d3f67cd62a353efdbe4fd9fa",
+  "success": true,
+  "timestamp": 1660623078
+}
+```
+
+</details>
+
+<details>
+<summary>Example 2</summary>
+
+Get the root hash of a subscribed store. Notice that an invalid hash is shown:
+
+```json
+chia rpc data_layer get_root '{"id":"8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d"}'
+```
+
+Response:
+
+```json
+{
+  "confirmed": true,
+  "hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "success": true,
+  "timestamp": 1660672031
+}
+```
+
+</details>
+
+---
+
+### `get_roots`
+
+Functionality: Get the root hashes and timestamps from a list of stores. Note that an invalid hash will be returned for subscribed stores. Use [get_local_root](#get_local_root) instead
+
+Usage: chia rpc data_layer [OPTIONS] get_roots [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters:
+
+| Flag | Type | Required | Description                     |
+| :--- | :--- | :------- | :------------------------------ |
+| ids  | TEXT | True     | A list of hexadecimal store IDs |
+
+<details>
+<summary>Example</summary>
+
+For this example, the first store is subscribed, so it will return an invalid root hash. The second store is owned, so the root hash will be valid:
+
+```json
+chia rpc data_layer get_roots '{"ids":["8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d", "0x1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e"]}'
+```
+
+Response:
+
+```json
+{
+  "root_hashes": [
+    {
+      "confirmed": true,
+      "hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "id": "0x8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d",
+      "timestamp": 1660672031
+    },
+    {
+      "confirmed": true,
+      "hash": "0xb5420e65846ded936d1e4855c066247fc461a3b281cd9e0e69f3cfa4df529ba2",
+      "id": "0x1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e",
+      "timestamp": 1660724174
     }
   ],
   "success": true
@@ -1309,11 +1374,11 @@ Response:
 
 ---
 
-### `add_mirror`
+### `get_routes`
 
-Functionality: Add a new mirror from a local or remote data store. Triggers a Chia transaction
+Functionality: Show a comprehensive list of RPC routes for the DataLayer
 
-Usage: chia rpc data_layer [OPTIONS] add_mirror [REQUEST]
+Usage: chia rpc data_layer [OPTIONS] get_routes
 
 Options:
 
@@ -1322,28 +1387,55 @@ Options:
 | -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
 | -h            | --help       | None     | False    | Show a help message and exit                                                          |
 
-Request Parameters:
-
-| Flag   | Type    | Required | Description                                                                                                      |
-| :----- | :------ | :------- | :--------------------------------------------------------------------------------------------------------------- |
-| id     | TEXT    | True     | The hexadecimal ID of the store to mirror                                                                        |
-| urls   | TEXT    | True     | A list of URLs where the mirror will reside. Can be empty                                                        |
-| amount | INTEGER | True     | The number of mojos to spend to create the mirror. In theory, mirrors with a higher `amount` will be prioritized |
-| fee    | TEXT    | False    | Set the fee for the transaction, in mojos                                                                        |
+Request Parameters: None
 
 <details>
 <summary>Example</summary>
 
-Create one mirror with multiple URLs:
-
 ```json
-chia rpc data_layer add_mirror '{"id":"0x1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e", "urls":["http://www.example.com:8575", "http://www.example2.com:8575"], "amount":1000000}'
+chia rpc data_layer get_routes
 ```
 
 Response:
 
 ```json
 {
+  "routes": [
+    "/create_data_store",
+    "/get_owned_stores",
+    "/batch_update",
+    "/get_value",
+    "/get_keys",
+    "/get_keys_values",
+    "/get_ancestors",
+    "/get_root",
+    "/get_local_root",
+    "/get_roots",
+    "/delete_key",
+    "/insert",
+    "/subscribe",
+    "/unsubscribe",
+    "/add_mirror",
+    "/delete_mirror",
+    "/get_mirrors",
+    "/remove_subscriptions",
+    "/subscriptions",
+    "/get_kv_diff",
+    "/get_root_history",
+    "/add_missing_files",
+    "/make_offer",
+    "/take_offer",
+    "/verify_offer",
+    "/cancel_offer",
+    "/get_sync_status",
+    "/check_plugins",
+    "/get_connections",
+    "/open_connection",
+    "/close_connection",
+    "/stop_node",
+    "/get_routes",
+    "/healthz"
+  ],
   "success": true
 }
 ```
@@ -1352,11 +1444,11 @@ Response:
 
 ---
 
-### `delete_mirror`
+### `get_sync_status`
 
-Functionality: Delete a mirror, by `coin_id`. Triggers a Chia transaction
+Functionality: Obtain the current sync status for a provided data store
 
-Usage: chia rpc data_layer [OPTIONS] delete_mirror [REQUEST]
+Usage: chia rpc data_layer [OPTIONS] get_sync_status [REQUEST]
 
 Options:
 
@@ -1367,23 +1459,124 @@ Options:
 
 Request Parameters:
 
-| Flag | Type | Required | Description                                                                              |
-| :--- | :--- | :------- | :--------------------------------------------------------------------------------------- |
-| id   | TEXT | True     | The `coin_id` of the mirror to delete, obtainable by running [get_mirrors](#get_mirrors) |
-| fee  | TEXT | False    | Set the fee for the transaction, in mojos                                                |
+| Flag | Type | Required | Description              |
+| :--- | :--- | :------- | :----------------------- |
+| id   | TEXT | True     | The hexadecimal store ID |
 
 <details>
-<summary>Example 1</summary>
+<summary>Example</summary>
 
 ```json
-chia rpc data_layer delete_mirror '{"id":"0x9a2132858b81907875a65123e592b7aea80b23724202ac21bba0aedf583f7427"}'
+chia rpc data_layer get_sync_status '{"id": "39114b28a3674b6c2c0ed65d3518842fd17f9df46794f49cd223f9f3a463f09d"}'
 ```
 
 Response:
 
 ```json
 {
-  "success": true
+  "success": true,
+  "sync_status": {
+    "generation": 1,
+    "root_hash": "532d8df550bdbdef28c1a7b27eaefc812afb99eabd59b3c041000c7ea352e900",
+    "target_generation": 1,
+    "target_root_hash": "532d8df550bdbdef28c1a7b27eaefc812afb99eabd59b3c041000c7ea352e900"
+  }
+}
+```
+
+</details>
+
+---
+
+### `get_value`
+
+Functionality: Given a key and the data store in which the key is located, return corresponding value
+
+Usage: chia rpc data_layer [OPTIONS] get_value [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters:
+
+| Flag      | Type | Required | Description                             |
+| :-------- | :--- | :------- | :-------------------------------------- |
+| id        | TEXT | True     | The hexadecimal store ID                |
+| key       | TEXT | True     | The hexadecimal key                     |
+| root_hash | TEXT | False    | The root hash from which to obtain data |
+
+:::info
+
+The `root_hash` parameter is recommended to be used each time you call this RPC.
+If `root_hash` is not specified, there is no way to guarantee that the latest data is being shown
+(stale data may be shown instead).
+This parameter is obtainable by calling the [get_root](#get_root) RPC.
+
+:::
+
+<details>
+<summary>Example</summary>
+
+Obtain the value for key `0x0001`. Pass in the `root_hash` to ensure the latest value is obtained:
+
+```json
+chia rpc data_layer get_value '{"id":"0x8f9601eba73a276d5b9e12fbec52b113217e89a55831ae1d80bca48462fbaea7", "key": "0x0001", "root_hash": "0x9527cc5e43bf93062423221e9bec761cbc3f24a0811cb0738da2419dfe7649f7"}'
+```
+
+Response:
+
+```json
+{
+  "success": true,
+  "value": "fadedcab"
+}
+```
+
+</details>
+
+---
+
+### `insert`
+
+Functionality: Insert a key/value pair into a store that you control. Triggers a Chia transaction
+
+Usage: chia rpc data_layer [OPTIONS] insert [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters:
+
+| Flag  | Type | Required | Description                               |
+| :---- | :--- | :------- | :---------------------------------------- |
+| id    | TEXT | True     | The hexadecimal store ID                  |
+| key   | TEXT | True     | The hexadecimal key                       |
+| value | TEXT | True     | The hexadecimal value                     |
+| fee   | TEXT | False    | Set the fee for the transaction, in mojos |
+
+<details>
+<summary>Example 1</summary>
+
+This example will create a key/value pair without `0x` prefixing:
+
+```json
+chia rpc data_layer insert '{"id":"1163ac212bd5fe00efa86f8d3c4958cda08924870800d72dc332f508a1b2e35a", "key":"0001", "value":"fadedcab"}'
+```
+
+Response:
+
+```json
+{
+  "success": true,
+  "tx_id": "0xaba9c1a25199acc8e05557527cfe683797b1c8b81d6011cdbb03f80f900febd2"
 }
 ```
 
@@ -1392,62 +1585,18 @@ Response:
 <details>
 <summary>Example 2</summary>
 
-If you attempt to delete a mirror you did not create, this will fail:
+This example will create a key/value pair with `0x` prefixing:
 
 ```json
-chia rpc data_layer delete_mirror '{"id":"0x83a75913f8222eebfbc047d2ab3bf4b92bd5c37f3acaa336a0bb8b3b3168c879"}'
-```
-
-Response:
-
-```json
-Request failed: {'error': "{'error': 'DL Wallet does not have permission to delete mirror with ID 83a75913f8222eebfbc047d2ab3bf4b92bd5c37f3acaa336a0bb8b3b3168c879', 'success': False}", 'success': False}
-```
-
-</details>
-
----
-
-### `get_mirrors`
-
-Functionality: List all mirrors for a store ID
-
-Usage: chia rpc data_layer [OPTIONS] get_mirrors [REQUEST]
-
-Options:
-
-| Short Command | Long Command | Type     | Required | Description                                                                           |
-| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
-| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
-| -h            | --help       | None     | False    | Show a help message and exit                                                          |
-
-Request Parameters:
-
-| Flag | Type | Required | Description                                               |
-| :--- | :--- | :------- | :-------------------------------------------------------- |
-| id   | TEXT | True     | The hexadecimal ID of the store for which to list mirrors |
-
-<details>
-<summary>Example</summary>
-
-```json
-chia rpc data_layer get_mirrors '{"id":"0x1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e"}'
+chia rpc data_layer insert '{"id":"0x1163ac212bd5fe00efa86f8d3c4958cda08924870800d72dc332f508a1b2e35a", "key":"0x0002", "value":"0xcafef00d"}'
 ```
 
 Response:
 
 ```json
 {
-  "mirrors": [
-    {
-      "amount": 1000000,
-      "coin_id": "11f450c2f706cda88b3373855b3780d36822a7f0e94297eb88de7c63eb0bd4c7",
-      "launcher_id": "1ad0908e248f48cc3e9b3cf8f68c748d2e3c5a2a933765032d3222086231ea5e",
-      "ours": true,
-      "urls": ["http://www.example.com:8575", "http://www.example2.com:8575"]
-    }
-  ],
-  "success": true
+  "success": true,
+  "tx_id": "0x212092519e5edce613d12b663bc9fa71c2d8f54da2c04ee5d5526cee0df84440"
 }
 ```
 
@@ -1663,6 +1812,146 @@ The offer has now been saved as a .json file and been sent to the Taker. See [ta
 
 ---
 
+### `remove_subscriptions`
+
+Functionality: Remove one or more URLs from a data store to which you subscribe. Note that this action will not remove the subscription to the data store itself. For that functionality, use [unsubscribe](#unsubscribe)
+
+Usage: chia rpc data_layer [OPTIONS] remove_subscriptions [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters:
+
+| Flag | Type | Required | Description                              |
+| :--- | :--- | :------- | :--------------------------------------- |
+| id   | TEXT | True     | The hexadecimal store ID                 |
+| urls | TEXT | True     | A list of URLs from which to unsubscribe |
+
+<details>
+<summary>Example</summary>
+
+```json
+chia rpc data_layer remove_subscriptions '{"id":"8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d", "urls":["http://www.example.com:8575"]}'
+```
+
+Response:
+
+```json
+{
+  "success": true
+}
+```
+
+</details>
+
+---
+
+### `subscribe`
+
+Functionality: Subscribe to a store ID
+
+Usage: chia rpc data_layer [OPTIONS] subscribe [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters:
+
+| Flag | Type | Required | Description                                                              |
+| :--- | :--- | :------- | :----------------------------------------------------------------------- |
+| id   | TEXT | True     | The hexadecimal store ID                                                 |
+| urls | TEXT | True     | A list of URLs where the data store resides. This list can be left blank |
+
+<details>
+<summary>Example 1</summary>
+
+Subscribe to a data store without specifying any URLs:
+
+```json
+chia rpc data_layer subscribe '{"id":"8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d", "urls":[]}'
+```
+
+Response:
+
+```json
+{
+  "success": true
+}
+```
+
+</details>
+
+<details>
+<summary>Example 2</summary>
+
+Subscribe to a data store using multiple URLs where that store resides:
+
+```json
+chia rpc data_layer subscribe '{"id":"8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d", "urls":["http://www.example.com:8575", "http://www.example2.com:8575"]}'
+```
+
+Response:
+
+```json
+{
+  "success": true
+}
+```
+
+</details>
+
+---
+
+### `subscriptions`
+
+Functionality: List the store ID for each current subscription
+
+Usage: chia rpc data_layer [OPTIONS] subscriptions [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters: None
+
+<details>
+<summary>Example</summary>
+
+```json
+chia rpc data_layer subscriptions
+```
+
+Response:
+
+```json
+{
+  "store_ids": [
+    "9166b9bed97e0ce9b5d79564e8dba2975ae0637994e8908a31aaddd7a29bfb90",
+    "a4a9a945a7511911aeaaefc9e6627831b1c30b1919c92c738592923f30fe3735",
+    "550386f956c9932210c38c674e42dca9db9655b8155069540feaac91833c664b",
+    "1163ac212bd5fe00efa86f8d3c4958cda08924870800d72dc332f508a1b2e35a",
+    "8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d"
+  ],
+  "success": true
+}
+```
+
+</details>
+
+---
+
 ### `take_offer`
 
 Functionality: Accept an offer to create one or more keys in exchange for the Maker creating one or more keys. Triggers a Chia transaction
@@ -1775,6 +2064,53 @@ Response:
 
 ---
 
+### `unsubscribe`
+
+Functionality: Unsubscribe from a store ID
+
+Usage: chia rpc data_layer [OPTIONS] unsubscribe [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters:
+
+| Flag | Type | Required | Description                                               |
+| :--- | :--- | :------- | :-------------------------------------------------------- |
+| id   | TEXT | True     | The hexadecimal ID of the store from which to unsubscribe |
+
+:::info
+
+The `unsubscribe` RPC may or may not delete any data, depending on which version of Chia you are running:
+* Prior to version 2.1, the command did not delete the .dat files, nor did it delete from the database.
+* As of version 2.1, the command deletes the .dat files, but does not delete from the database.
+* In a future release, the command will also delete from the database.
+
+:::
+
+<details>
+<summary>Example</summary>
+
+```json
+chia rpc data_layer unsubscribe '{"id":"8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d"}'
+```
+
+Response:
+
+```json
+{
+  "success": true
+}
+```
+
+</details>
+
+---
+
 ### `verify_offer`
 
 Functionality: Verify that a DataLayer offer is well-formed
@@ -1837,11 +2173,9 @@ Request failed: {'error': 'non-hexadecimal number found in fromhex() arg at posi
 
 ---
 
-### `cancel_offer`
+### `wallet_log_in`
 
-Functionality: Cancel a DataLayer offer
-
-Usage: chia rpc data_layer [OPTIONS] cancel_offer [REQUEST]
+Functionality: Request that the wallet service be logged in to the specified fingerprint
 
 Options:
 
@@ -1852,25 +2186,78 @@ Options:
 
 Request Parameters:
 
-| Flag     | Type    | Required | Description                                                                                                                                                                                                                                                             |
-| :------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| trade_id | TEXT    | True     | The `trade_id` of the offer. This is displayed with the response of the [make_offer](#make_offer) RPC                                                                                                                                                                   |
-| secure   | BOOLEAN | True     | If `true`, the offer will be canceled on the blockchain, making it impossible to be accepted later. If `false`, the offer will only be canceled locally. We recommend that you set this to `true` unless you are certain that the offer file has not left your computer |
-| fee      | TEXT    | False    | If `secure` is `true`, this will set the fee for the transaction, in mojos. If `secure` is `false`, the fee will be ignored                                                                                                                                             |
+| Flag        | Type   | Required | Description                          |
+| :---------- | :----- | :------- | :----------------------------------- |
+| fingerprint | STRING | True     | The fingerprint of the wallet to use |
 
 <details>
-<summary>Example </summary>
-
-Cancel an offer on-chain, using "secure":"true":
+<summary>Example</summary>
 
 ```json
-chia rpc data_layer cancel_offer '{"trade_id":"92652561cc3f40677d7d73513b4dde4a56da1c9edc0cfd9f03bb001b95df42af", "secure":"true", "fee":"1000"}'
+chia rpc data_layer wallet_log_in '{"fingerprint":"3404181419"}'
 ```
 
 Response:
 
 ```json
 {
+  "success": true
+}
+```
+
+</details>
+
+---
+
+## Inherited commands
+
+### `close_connection`
+
+Functionality: Close an active connection
+
+Note: Inherited from RPC Server
+
+Usage: chia rpc data_layer [OPTIONS] close_connection [REQUEST]
+
+Options:
+
+| Short Command | Long Command | Type     | Required | Description                                                                           |
+| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
+| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
+| -h            | --help       | None     | False    | Show a help message and exit                                                          |
+
+Request Parameters:
+
+|  Flag   | Type | Required | Description                                                                            |
+| :-----: | :--: | :------: | :------------------------------------------------------------------------------------- |
+| node_id | TEXT |   True   | The hex ID of the node to close, obtainable from [`get_connections`](#get_connections) |
+
+<details>
+<summary>Example</summary>
+
+```json
+chia rpc data_layer close_connection '{"node_id":"0x8e961b617579d476419003728d6d71ab1b182f7d962e5db16f61ebfb157d771b"}'
+```
+
+Response:
+
+```json
+{
+  "success": true
+}
+```
+
+Verify that the connection has been closed:
+
+```json
+chia rpc data_layer get_connections
+```
+
+Response:
+
+```json
+{
+  "connections": [],
   "success": true
 }
 ```
@@ -1972,61 +2359,6 @@ Response:
 
 ---
 
-### `close_connection`
-
-Functionality: Close an active connection
-
-Note: Inherited from RPC Server
-
-Usage: chia rpc data_layer [OPTIONS] close_connection [REQUEST]
-
-Options:
-
-| Short Command | Long Command | Type     | Required | Description                                                                           |
-| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
-| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
-| -h            | --help       | None     | False    | Show a help message and exit                                                          |
-
-Request Parameters:
-
-|  Flag   | Type | Required | Description                                                                            |
-| :-----: | :--: | :------: | :------------------------------------------------------------------------------------- |
-| node_id | TEXT |   True   | The hex ID of the node to close, obtainable from [`get_connections`](#get_connections) |
-
-<details>
-<summary>Example</summary>
-
-```json
-chia rpc data_layer close_connection '{"node_id":"0x8e961b617579d476419003728d6d71ab1b182f7d962e5db16f61ebfb157d771b"}'
-```
-
-Response:
-
-```json
-{
-  "success": true
-}
-```
-
-Verify that the connection has been closed:
-
-```json
-chia rpc data_layer get_connections
-```
-
-Response:
-
-```json
-{
-  "connections": [],
-  "success": true
-}
-```
-
-</details>
-
----
-
 ### `stop_node`
 
 Functionality: Stop your local node
@@ -2060,113 +2392,3 @@ Response:
 </details>
 
 ---
-
-### `get_sync_status`
-
-Functionality: Obtain the current sync status for a provided data store
-
-Usage: chia rpc data_layer [OPTIONS] get_sync_status [REQUEST]
-
-Options:
-
-| Short Command | Long Command | Type     | Required | Description                                                                           |
-| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
-| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
-| -h            | --help       | None     | False    | Show a help message and exit                                                          |
-
-Request Parameters:
-
-| Flag | Type | Required | Description              |
-| :--- | :--- | :------- | :----------------------- |
-| id   | TEXT | True     | The hexadecimal store ID |
-
-<details>
-<summary>Example</summary>
-
-```json
-chia rpc data_layer get_sync_status '{"id": "39114b28a3674b6c2c0ed65d3518842fd17f9df46794f49cd223f9f3a463f09d"}'
-```
-
-Response:
-
-```json
-{
-  "success": true,
-  "sync_status": {
-    "generation": 1,
-    "root_hash": "532d8df550bdbdef28c1a7b27eaefc812afb99eabd59b3c041000c7ea352e900",
-    "target_generation": 1,
-    "target_root_hash": "532d8df550bdbdef28c1a7b27eaefc812afb99eabd59b3c041000c7ea352e900"
-  }
-}
-```
-
-</details>
-
----
-
-### `get_routes`
-
-Functionality: Show a comprehensive list of RPC routes for the DataLayer
-
-Usage: chia rpc data_layer [OPTIONS] get_routes
-
-Options:
-
-| Short Command | Long Command | Type     | Required | Description                                                                           |
-| :------------ | :----------- | :------- | :------- | :------------------------------------------------------------------------------------ |
-| -j            | --json-file  | FILENAME | False    | Optionally instead of REQUEST you can provide a json file containing the request data |
-| -h            | --help       | None     | False    | Show a help message and exit                                                          |
-
-Request Parameters: None
-
-<details>
-<summary>Example</summary>
-
-```json
-chia rpc data_layer get_routes
-```
-
-Response:
-
-```json
-{
-  "routes": [
-    "/create_data_store",
-    "/get_owned_stores",
-    "/batch_update",
-    "/get_value",
-    "/get_keys",
-    "/get_keys_values",
-    "/get_ancestors",
-    "/get_root",
-    "/get_local_root",
-    "/get_roots",
-    "/delete_key",
-    "/insert",
-    "/subscribe",
-    "/unsubscribe",
-    "/add_mirror",
-    "/delete_mirror",
-    "/get_mirrors",
-    "/remove_subscriptions",
-    "/subscriptions",
-    "/get_kv_diff",
-    "/get_root_history",
-    "/add_missing_files",
-    "/make_offer",
-    "/take_offer",
-    "/verify_offer",
-    "/cancel_offer",
-    "/get_connections",
-    "/open_connection",
-    "/close_connection",
-    "/stop_node",
-    "/get_routes",
-    "/healthz"
-  ],
-  "success": "true"
-}
-```
-
-</details>

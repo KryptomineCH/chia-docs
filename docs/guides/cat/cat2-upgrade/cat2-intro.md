@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-CAT1 reachead its end of life at block 2,311,760, which occurred on July 26, 2022 at around 17:00 UTC. This was the final block where CAT1 was valid. At this block height, a snapshot was taken of all CAT1 tokens, along with the addresses of where they were being held. CAT1 issuers are now able to issue new CAT2 tokens and airdrop them to the same addresses where the CAT1 tokens were held.
+CAT1 reached its end of life at block 2,311,760, which occurred on July 26, 2022 at around 17:00 UTC. This was the final block where CAT1 was valid. At this block height, a snapshot was taken of all CAT1 tokens, along with the addresses of where they were being held. CAT1 issuers are now able to issue new CAT2 tokens and airdrop them to the same addresses where the CAT1 tokens were held.
 
 Chia version 1.5.0 was released on July 26, 2022. Since then, CAT1 tokens are not shown in the wallet. Users will only see the newly-issued CAT2 tokens, which will be identical in value to their CAT1 equivalents.
 
@@ -25,7 +25,7 @@ Check out the [Snapshot Generation guide](/guides/cat2-snapshot) to get started 
 
 A CAT is a Chia Asset Token. CATs are fungible tokens that are issued on the Chia blockchain. The CAT1 standard was finalized in January 2022. You can read more about the [CAT primitive](https://chialisp.com/cats). Some examples of CATs include Stably USD (USDS), Spacebucks (SBX), and Marmot (MRMT).
 
-#### Why is this change happening with CATs? {#why-cat2}
+#### Why were CATs transitioned to CAT2? {#why-cat2}
 
 The CAT standard was upgraded to CAT2 based on a security vulnerability found by an outside security audit. This resulted in an upgrade to the latest Chia wallet app as well as updates that will require all original issuers of CAT1 tokens to reissue their tokens on the CAT2 standard and end-of-life support for CAT1. Chia is working with community members to make this process as seamless as possible.
 
@@ -173,7 +173,7 @@ It is possible that you have received multiple identical airdrops from different
 
 #### Who can I contact if I have any problems or questions? {#who-to-contact}
 
-The Chia Network Support Team is available to answer questions and provide assistance through this process in the official Support [Keybase channel](https://keybase.io/team/chia_network.public).
+The Chia Network Support Team is available to answer questions and provide assistance through this process in the official Support [Discord](https://discord.gg/chia).
 
 ### CAT1 Balance Website {#cat1-balance-website}
 

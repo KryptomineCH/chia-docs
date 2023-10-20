@@ -33,7 +33,7 @@ Chia NFTs focus on three key features:
 
 - Marketplace Independence -- you never are required to transfer your NFT to a marketplace in order to sell it. While marketplace custody is allowed, self custody has been standard with Chia NFTs from Day 1.
 - Consistent Provenance -- DIDs enable the tracking of an NFT's complete history. You are highly encouraged to attach your DID to all of the NFTs you create. The DID will later be used to verify the NFTs' authenticity.
-- Digital Permanance -- You can add a list of links to your NFTs' data, metadata, and license. Each link is verified with a hash, which is permanently embedded in the NFT itself. If one link changes or disappears, you can rely on another existing link, or create a new one. Even if all of the links disappear, as long as someone maintains a copy of the original file, the owner can always prepend a new link to the list.
+- Digital Permanence -- You can add a list of links to your NFTs' data, metadata, and license. Each link is verified with a hash, which is permanently embedded in the NFT itself. If one link changes or disappears, you can rely on another existing link, or create a new one. Even if all of the links disappear, as long as someone maintains a copy of the original file, the owner can always prepend a new link to the list.
 
 ### Collections
 
@@ -48,10 +48,10 @@ While some creators may wish to release their NFTs as individual pieces (so-call
 
 #### Edition
 
-"Edition" means multiple NFTs with _identical_ data and metadata. In the NFT1 standard, the NFT's edition is part of the _on-chain_ metadata. This means that it is built into the NFT itself. There are two parmeters related to edition:
+"Edition" means multiple NFTs with _identical_ data and metadata. In the NFT1 standard, the NFT's edition is part of the _on-chain_ metadata. This means that it is built into the NFT itself. There are two parameters related to edition:
 
 - `edition_number` is the sequence number of this NFT's edition. For example, if the collection contains ten identical images of an apple, the NFTs could be labeled `Apple #1 of 10`, `Apple #2 of 10`, etc. The `edition_number` would then be `1`, `2`, etc. If each NFT in a collection is distinct, then the `edition_number` for each NFT is `1`. In this case, most NFT creators will choose not to specify this redundant `edition_number`.
-- `edition_count` is the total number of identical NFTs that are part of this edition. If `edition_number` is specified for an NFT, then `edition_count` is required. In the above example, each NFT that contains an identical apple image would have an `edition_count` of 10. Because this parameter must be specified upon an NFT's minting, it gives prospective buyers confidence that no surprise copies of an NFT will later be minted.
+- `edition_total` is the total number of identical NFTs that are part of this edition. If `edition_number` is specified for an NFT, then `edition_total` is also recommended to be specified. In the above example, each NFT that contains an identical apple image would have an `edition_total` of 10.
 
 ## CLVM Cost
 
@@ -152,7 +152,7 @@ alias chia="/Applications/Chia.app/Contents/Resources/app.asar.unpacked/daemon/c
 
 ### Installing from source
 
-To install Chia from source, follow our [installation wiki](https://github.com/Chia-Network/chia-blockchain/wiki/INSTALL), which includes instructions for intalling on all supported operating systems.
+To install Chia from source, follow our [installation wiki](https://github.com/Chia-Network/chia-blockchain/wiki/INSTALL), which includes instructions for installing on all supported operating systems.
 
 ### Switching to testnet
 
@@ -277,7 +277,7 @@ Genesis Challenge: ae83525ba8d1dd3f09b277de18ca3e43fc0af20d20c4b3e92ef2a48bd291c
 Current Blockchain Status: Full Node Synced
 ```
 
-Once you have a synced wallet and some TXCH, you may proceed to the next section. If your requested TXCH has not yet arrived, post your address on the #dev channel on Keybase. Someone might be able to send some to you.
+Once you have a synced wallet and some TXCH, you may proceed to the next section. If your requested TXCH has not yet arrived, post your address on the #dev channel on Discord. Someone might be able to send some to you.
 
 <details>
   <summary>Note about Chia wallets</summary>
@@ -340,11 +340,9 @@ Under Wallet Key 3 of this setup, it would not be possible to create another NFT
 
 ## Obtain images with corresponding hashes
 
-For this guide, we'll obtain four images and hashes to be used for creating NFTs with the following use cases:
+For this guide, we'll obtain two images and hashes to be used for creating NFTs with the following use cases:
 
-- CLI, no DID
 - CLI, with DID
-- RPC, no DID
 - RPC, with DID
 
 Here's the general technique to obtain images and hashes:
@@ -372,12 +370,7 @@ Then, calculate the image's hash. Here are three (of many) options:
 
 In all three cases, the hash for this sample image is `14836b86a48e1b2b5e857213af97534704475b4c155d34b2cb83ed4b7cba2bb0`.
 
-The following is a list of the sample images and hashes this guide will use. For the NFTs with DIDs, we'll specify the metadata and license information. Additionally, we'll use multiple copies of the Metadata URI with these NFTs. For the NFTs without DIDs, we won't specify license or metadata information (this is only for simplicity -- normally you would want to specify this data).
-
-### CLI, no DID
-
-- URI: [https://images.pexels.com/photos/1529881/pexels-photo-1529881.jpeg](https://images.pexels.com/photos/1529881/pexels-photo-1529881.jpeg)
-- Hash: feef1ea09c0f93fcf5a8d7e0018f2511638d317d78e3d3a71462cdb061baad68
+The following is a list of the sample images and hashes this guide will use, along with the metadata and license information. Additionally, we'll use multiple copies of the Metadata URI with these NFTs.
 
 ### CLI, with DID
 
@@ -388,11 +381,6 @@ The following is a list of the sample images and hashes this guide will use. For
 - Metadata Hash: e9e9366f050e90ceb04a4778f2adfa02dfb565327d225eb35101f0de553ac20b
 - License URI: https://raw.githubusercontent.com/Chia-Network/chia-blockchain/main/LICENSE
 - License Hash: 30a358857da6b49f57cfe819c1ca43bfe007f528eb784df5da5cb64577e0ffc6
-
-### RPC, no DID
-
-- URI: [https://images.pexels.com/photos/4812689/pexels-photo-4812689.jpeg](https://images.pexels.com/photos/4812689/pexels-photo-4812689.jpeg)
-- Hash: 995b5e2837fa68292e88dd5f900ea83953aafcb6bfb7c086f1ba7671946c4600
 
 ### RPC, with DID
 
@@ -410,7 +398,7 @@ In theory you can use any hosting site to host your NFT images. However, do make
 
 Certain decentralized services such as IPFS can be slow. The first time a user attempts to view an NFT in their wallet (before caching), it might take a long time to load.
 
-Chia NFTs use a list to store image URIs, so it is possible to add multiple locations to increase permanance. However, do make sure each image's hash is the same as the data hash.
+Chia NFTs use a list to store image URIs, so it is possible to add multiple locations to increase permanence. However, do make sure each image's hash is the same as the data hash.
 
 ## NFT Metadata Standards
 

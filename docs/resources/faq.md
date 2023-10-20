@@ -28,17 +28,171 @@ A VDF, also known as a proof of time, is a sequential operation that takes a pre
 
 XCH is the currency symbol for Chia. TXCH is the currency symbol currently being used for testnet chias. TXCH has no value and is only used for testing purposes. Chias and testnet chias can be divided up to 12 decimal places (trillionths). The smallest unit of chia, a trillionth of a chia, is called a mojo, as a tribute to [Mojo Nation](<https://en.wikipedia.org/wiki/Mnet_(peer-to-peer_network)#Evil_Geniuses_for_a_Better_Tomorrow>), a decentralized file storage platform created in the early 2000s by Zooko Wilcox, Bram Cohen, and others.
 
-### Chia vs XCH vs Mojo
+### Chia vs XCH vs mojo vs chia
 
-- **Chia** - depending on context, this can refer to Chia Network the company, the Chia software (Chia client), or the Chia blockchain.
+- **Chia** - uppercase Chia depending on context, this can refer to Chia Network the company, the Chia software (Chia client), or the Chia blockchain.
 - **XCH** - refers to the Chia token, XCH.
-- **Mojo** - a trillionth of an XCH.
+- **mojo** - a trillionth of an XCH.
+- **chia** - lowercase chia refers to the Chia token, XCH. Similarly, mojos are lowercase.
+
+
+### How do I sign up for the Chia email newsletter? 
+
+You can sign up for the Chia email newsletter by following [this link](http://eepurl.com/hQDvIn).
+
+You can select either General Chia News or Developers News or both to receive emails about those topics.
+
+### What are the rules and guidelines around using Chia's trademarks and copyrighted materials on my own site or project? 
+
+Chia, like all companies, has an obligation to protect and enforce its Trademarks and Copyrights in the relevant jurisdictions. We do this both to ensure that we properly maintain our own responsible use of them, as well as to prevent bad actors from attempting to leverage Chia’s property in an effort to scam the ecosystem or cause other harm. That said, we do want to make it possible for people to talk about Chia, and build tools and platforms that support it’s growth openly. To this effect we have [several guidelines](https://www.chia.net/about#legal) that we hope will help you better understand some “Do’s and Don’ts” as you go about this. (And if you are ever unsure, you are always welcome to email us at [hello@chia.net](mailto:hello@chia.net) with questions about this subject!)
+
+### How do I contact Chia with more questions? 
+
+You can email us at [hello@chia.net](mailto:hello@chia.net) or join us on [Discord](https://discord.gg/chia).
+
+Please note that for support with Chia, we do not offer 1:1 direct support. All support is provided via our discord #support channel.
+
+### Will the average person be able to use Chia as a payment instrument? 
+
+Our hope is that, over time, Chia will be supported by point of sale systems and consumer payment apps all over the world. For example, if you pay for a coffee at Tully’s in England with your GrabPay app from Thailand, it should “just work” without you needing to know it was paid in Chia.
+
+Or, for example, if services like Venmo or Cash App aren’t available where you live, using Chia will be far less of a hassle than executing a slow and expensive wire transfer. Using legacy banking to send and convert cash across borders is cumbersome, slow and expensive, and while alternative money transfer services might be faster, they’re not cheap: Western Union can charge upwards of 10% in transfer fees.
+
+The technology is completely open source and accessible, and anyone can build a new wallet without our permission or assistance. However, we intend to help wallet, exchange, and merchant processing partners with support and integration services, joint marketing and lending for liquidity.
+
+### Why are you named Chia? 
+
+We’re green money! Our founder Bram Cohen started the company knowing he wanted to reduce the energy dependence of blockchains through a “green” option. The concept of farming seemed to be the best metaphor for filling unused disk space and monitoring it for winning sprouts. This led us to look for a grain that had the properties we wanted to embody with our new Network. The team wanted a name that would be short and impactful. Everyone was amused that it was also a grain associated with a whimsical meme. Chia Network was born.
+
+### Is the value of Chia going to be as volatile as other cryptocurrencies? 
+
+We believe that Chia coins will be less volatile than other cryptocurrencies due to the planned nature of our planned public company status which will allow financial institutions to hedge and leverage coins and equity. Initially, we expect Chia Network to largely be valued based upon the valuation of the chia that the Company will hold on its balance sheet. Movements in the price of chia on digital exchanges are likely to be mirrored by price movements in the price of our stock on a stock exchange. There will be more ways to get exposure to the success of chia than traditional blockchain projects. This will also allow the usual options and derivatives to our stock to be used as something like a synthetic derivative for the price of chia coins. Additionally, our ability to use the Chia Strategic Reserve may reduce some volatility of chia in the market.
+
+### Why does Chia run competitions? 
+
+We believe that more eyes on our code will only make it better. For example, the [results](https://www.chia.net/2019/07/18/chia-vdf-competition-round-2-results-and-announcements/) of our [VDF Competition](https://github.com/Chia-Network/vdf-competition) produced a VDF implementation whose runtime was 80% faster than our original implementation.
+
+### Where has Chia advanced the state of the art in applied cryptography?
+
+Chia has created three new core inventions and advanced the interest in, and adoption of, a fourth. Firstly, Chia created the first intended for production [BLS Signatures library](https://github.com/Chia-Network/bls-signatures). Second, Chia is the first production use of Verifiable Delay Functions, or VDFs. Third, Chia created [Proof of Space and Time for Nakamoto consensus](https://docs.chia.net/green-paper-abstract).
+
+Finally, Chia is the first production use of [class groups](https://github.com/Chia-Network/vdf-competition/blob/master/classgroups.pdf) of unknown order which has spawned significant new research into their applicability to cryptography.
+
+### Does Chia use Bitcoin's code? 
+
+No. Chia is written entirely from scratch with a custom form of Lisp called [Chialisp](https://chialisp.com/).
+
+Chia also advanced applied cryptography as described above.
+
+### Isn't Bitcoin good enough? 
+
+When Bitcoin was developed, it was not foreseen that specialized hardware could vastly outperform the computers that everyone owns. What was intended to be a decentralized network is now controlled by a small number of miners with access to chip fabrication plants and wholesale electricity purchasing (or worse). The miners who currently control the Bitcoin Network feel they have a competitive advantage as is and oppose changing the protocol even when it’s clear that it should be changed. Chia has had ten years to study the new digital money ecosystem and believes we can make cryptocurrency more decentralized, more secure, and easier to use.
+
+### What is Chia's inflation? 
+
+After the Chia pre-farm, Chia offers farming rewards of 64 chia every 10 minutes. Over the first 12 years the farming rewards will be halved at the end of each 3rd year. From year 13 to infinity, the rewards will remain constant at 4 chia every 10 minutes leading to ever decreasing inflation rates. Chia’s inflation falls through the 0.50% rate 22 years after mainnet launch. More information can be found in our [halving schedule](/block-rewards/#halvings)
+
+### Where is the Chia source code?
+
+The Chia Blockchain comes together from a few different repositories:
+
+| Repository                                                                 | Contents                                                                      |
+|----------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| [chia-blockchain](https://github.com/Chia-Network/chia-blockchain)         | Consensus code, networking, and reference Chialisp implementations.           |
+| [chia-blockchain-gui](https://github.com/Chia-Network/chia-blockchain-gui) | An Electron/React graphical user interface to the plotter, node, and wallets. |
+| [clvm](https://github.com/Chia-Network/clvm)                               | Chialisp Virtual Machine in Python                                            |
+| [clvm-rs](https://github.com/Chia-Network/clvm_rs)                         | Chialisp Virtual Machine in Rust for security and performance.                |
+| [chiapos](https://github.com/Chia-Network/chiapos)                         | Creating plots and verifying Proofs of Space.                                 |
+| [chiavdf](https://github.com/Chia-Network/chiavdf)                         | Proofs of time/VDFs and Timelords.                                            |
+| [bls-signatures](https://github.com/Chia-Network/bls-signatures)           | IETF standard BLS-12-381 signature scheme.                                    |
+| [clvm_tools](https://github.com/Chia-Network/clvm_tools)                   | Tools for Chialisp and CLVM.                                                  |
+| [Chia Network Organization](https://github.com/Chia-Network)               | Contains all of the public Chia repos released by Chia Network                |
+
+### When did Chia launch mainnet? 
+
+Chia launched mainnet on March 19, 2021. You can follow along with code updates across our many repositories outlined [here](/faq#where-is-the-chia-source-code)
+
+### What is the Chia Strategic Reserve? 
+
+Chia has a novel business model to both, lower volatility of the coin and increase adoption. By loaning Chia and managing the interest rates of those loans as well as other tools like buying our stock with chia coins, we hope to lower the quarter to quarter volatility of the coin. To drive adoption, we intend to loan Chia to Global 5000 companies who will use it to pay their international vendors quickly, less expensively, and more securely. We also intend to use the strategic reserve to aid development and adoption. We plan to do things like invest in promising startups in the Chia ecosystem, potentially increase farming rewards during limited periods of time to spur additional farming, and fund corporations paying 105% of the value of their international payables in Chia instead of fiat currency.
+
+Chia Network Inc created 21 million chia at mainnet launch. This is known as the Strategic Reserve. For details on the Company’s plans for the Strategic Reserve, see page 20 of the [Business Whitepaper](https://www.chia.net/whitepaper/).
+
+### Did Chia have an ICO? 
+
+No. Chia did not have and is not planning an ICO. Instead, our goal is to take the company’s equity public on an American stock exchange. This way, shareholders can share risk and return with management with transparency and disclosure while we use well understood corporate controls to make binding statements about how Chia Network intends to use the [Strategic Reserve](/faq#what-is-the-chia-strategic-reserve). The chia coin (XCH) is meant to be a useful payment instrument and not an investment opportunity. Chia intends to complete a fully compliant SEC registered equity IPO and will come to market as market-timing is amenable.
+
+### Why do I want to farm Chia? 
+
+You can farm Chia on the unused storage of your laptop, desktop, or corporate network and, in return, you have the chance to receive rewards in chia for helping secure the blockchain. Our software allows you to allocate a certain amount of unused disk space to create plots. Since the only resource intensive step is the initial plotting, once you download the Chia node software, your drives will be plotted in the background. Once plotting is complete, your computer will begin farming on your behalf and the software does all the work and tracks your rewards for you. Ongoing farming uses very little network bandwidth and almost no resources other than storage. By making the farming process available to anyone with unused disk space, we are moving towards our goal of a truly decentralized blockchain that will also serve as a cross subsidy to the storage and cloud industry. Visit our [Farming Basics](/farming-basics) doc to get started.
+
+### What is the Chia Network Strategy? 
+
+It is our belief that the blockchain industry is still led by developers. We intend to be the superior chain for deploying new applications and services as well as being the only serious and secure choice for applications like sovereign backed stable coins. The Chia Network business will be the first for profit company that manages a pre-farm and we intend to be the first publicly tradable “near ETF” cryptocurrency. We believe that - as Redhat and MySQL AB were necessary to drive corporate adoption of linux and mysql - we will be the source for support and training as sovereigns, financial institutions, and corporations look to use cryptocurrency in daily commerce. Finally, we believe that we will be able to leverage the storage ecosystem to drive adoption at corporations and end users as hard drive manufacturers and storage server sellers are likely to bundle space farming into their offerings.
+
+Our [Business Whitepaper](https://www.chia.net/whitepaper/) is the definitive document on our strategy and approach.
+
+### Where can I learn more about the technical details of your consensus algorithm? 
+
+Details can be found on the [Consensus](/consensus-intro) page of our docs site.
+
+Additionally, we maintain a list of academic papers and presentations about Chia on our [references page](/references#chias-technical-specs).
+
+### What is the difference between mining and farming? 
+
+Mining requires expensive single use hardware that consumes exorbitant amounts of electricity. We are mitigating this problem through a fair, eco-friendly, and better blockchain that uses farming to leverage existing empty hard disk space distributed on nodes around the globe. Farming remains decentralized because anyone that has installed our software and has plots can win the next block. Mining requires expensive custom single use hardware and access to electricity at wholesale or better prices which only purpose built corporations can afford to mine. Farming is more decentralized because it relies on empty hard disk space and anyone with a mobile phone, laptop, or corporate network tends to have extra space not currently being used. Unlike mining, once you’re done farming your storage you can repurpose it to, for example, store your family photos.
+
+For more information we have this [blog article](https://www.chia.net/2023/01/18/mining-vs-farming/), or you can refer to our [Farming](/farming-basics) and [Plotting](/plotting-basics) docs.
+
+### Where can I learn more about Chialisp? 
+
+Documentation can be found at [Chialisp.com](https://chialisp.com/).
+
+### Why is Chia better? 
+
+Chia has a new innovative Nakamoto consensus algorithm, [Proof of Space and Time](https://docs.chia.net/green-paper-abstract), that removes the energy demands of Proof of Work from the system. Compared to other cryptocurrencies, Chia has significantly better security due to its more decentralized blockchain by Nakamoto Coefficient. [Chialisp](https://chialisp.com/) is Chia’s new smart transaction programming language that is powerful, easy to audit, and secure and will unlock the security, transparency, and ease of use that cryptocurrencies promise. Chia is also adopting more modern cryptographic tools to enable richer smart transaction capabilities. Chia is taking a new and superior approach to funding, building, and supporting a blockchain via an eventually public, for-profit, open source development company that holds a pre-farm. Chia will use its [Strategic Reserve](/faq#what-is-the-chia-strategic-reserve) to ease the volatility of the coin to mitigate bubbles and crashes and to drive adoption of chia.
+
+### What is Proof of Space and Time? 
+
+Chia developed a new innovative Nakamoto consensus algorithm, [Proof of Space and Time](https://docs.chia.net/green-paper-abstract), that eliminates the energy demands of Proof of Work while maintaining and in some cases enhancing security.
+
+Proof of Space is a cryptographic technique where provers show that they allocate unused hard drive space for storage space. In order to be used as a consensus method, Proof of Space must be tied to Proof of Time. PoT ensures that block times have consistency in the time between them and increases the overall security of the blockchain.
+
+### What is Chialisp? 
+
+Chia has a newly developed, innovative blockchain programming language called [Chialisp.com](https://chialisp.com/), which is powerful, easy to audit, and secure. Chialisp is a superior on-chain smart transaction development environment that will unlock the security, transparency, and ease of use that cryptocurrencies promise.
+
+### How does Proof of Space and Proof of Time work? 
+
+Proof of space can be thought of as a way to prove that you are keeping some storage unused on your hard-disk drive. Users of the Chia blockchain will “seed” unused space on their hard-disk drive by installing software which stores a collection of cryptographic numbers on the disk into “plots.” These users are called “farmers.” When the blockchain broadcasts a challenge for the next block, farmers can scan their plots to see if they have the hash that is closest to the challenge. A farmer’s probability of winning a block is the percentage of the total space that a farmer has compared to the entire network.
+
+Proof of time requires a small period of time to pass between blocks. Proof of time is implemented by a Verifiable Delay Function that takes a certain amount of time to compute, but is very fast to verify. The key idea of a VDF is that they require sequential computation, and since having many parallel machines does not yield any benefit, electricity waste is minimized. There will likely be relatively few VDF servers (“Timelords”), as the fastest one will always finish first and it takes only one fast and fair Timelord on the network to complete a block and move the chain forward.
+
+More information can be found in the [Green Paper](https://docs.chia.net/green-paper-abstract).
+
+### Where can I get answers to questions about running Chia? 
+
+You should first read through the [Chia Introduction](https://docs.chia.net/introduction) and [docs FAQ](/faq), check out the wealth of information on our [docs site](https://docs.chia.net/) and join us on [discord](https://discord.gg/chia) in the #support or #general channels. We have also created a good summary of the basics of [creating plots](https://www.chia.net/2021/02/22/plotting-basics/) for Chia.
+
+### What is Chia? 
+
+Chia was incorporated in August of 2017 to develop an improved blockchain and smart transaction platform. We are building the Chia Network to improve the global financial and payments systems. Chia is the first enterprise-grade digital money. Chia is using the first new Nakamoto consensus algorithm since Bitcoin. Called Proof of Space and Time, it was created by Bram Cohen, the best network protocol engineer alive and the inventor of BitTorrent. Chialisp is Chia’s new smart transaction programming language that is powerful, easy to audit, and secure. Reference smart transactions currently available are: atomic swaps, authorized payees, recoverable wallets, multisig wallets, and rate-limited wallets.
+
+### What is the official Chia Network DID used for NFTs? 
+
+From time to time, Chia Network may release NFTs for a variety of reasons, such as our inaugural Chia Friends collection. Any NFTs minted by Chia Network will use our official DID: `did:chia:19qf3g9876t0rkq7tfdkc28cxfy424yzanea29rkzylq89kped9hq3q7wd2`. Always check the provenance of an NFT purportedly to be official from us by looking for this DID as the minter. Fortunately, the majority of 3rd party platforms are designed to automatically show the Chia Network name and/or logo with these NFTs, but it never hurts to double check!
 
 ## Plotting
 
 ### What is k?
 
-"k" is the space parameter that controls the size of plots. It is an integer for the following equation: `plot_size_bytes = C1 * 2^k(k + C2)` where C1 is constant 1 and C2 is constant 2. In practice this means that final size is roughly `((2 * k) + 1) * (2 ** (k - 1)) * 0.762` though that constant is estimated. You can examine the [Space Required section](https://www.chia.net/assets/Chia_Proof_of_Space_Construction_v1.1.pdf#page=15) of the [Chia Proof of Space Construction document](https://www.chia.net/assets/Chia_Proof_of_Space_Construction_v1.1.pdf) for the calculation of how much space is required for a given k.
+"k" is the space parameter that controls the size of plots. It is an integer for the following equation: `plot_size_bytes = C1 * 2^k(k + C2)` where C1 is constant 1 and C2 is constant 2. In practice this means that final size is roughly `((2 * k) + 1) * (2 ** (k - 1)) * 0.78005` though that constant is estimated. You can examine the [Space Required section](https://www.chia.net/assets/Chia_Proof_of_Space_Construction_v1.1.pdf#page=15) of the [Chia Proof of Space Construction document](https://www.chia.net/assets/Chia_Proof_of_Space_Construction_v1.1.pdf) for the calculation of how much space is required for a given k.
+
+:::note
+
+Prior to Chia 2.0, the estimated space constant factor of 0.762 slightly incorrect. This led to a netspace calculation that was lower than the actual netspace. To correct this, we have [updated the constant factor](https://github.com/Chia-Network/chia-blockchain/pull/15771) to 0.78005.
+
+:::
 
 ### How big are plot sizes (k)?
 
@@ -81,7 +235,7 @@ If you see something like `Caught plotting error: Not enough memory for sort in 
 
 This is a RAM problem with your machine. It can be how your swap file is configured. It is often your overclock, or XMP settings and even can be a faulty RAM stick. Chia plotting is better than memtest at surfacing broken or mis-configured RAM.
 
-### My computer/drive went into power save or rebooted while plotting?
+### Can I resume plotting if my computer or drive reboots or enters power save mode while plotting? ?
 
 Unfortunately, resuming a plot is not supported. We suggest that you disable power saving mode - especially for external drives - and try to limit other possible causes of interruptions. Plotting a k=32 could take multiple hours, depending on your hardware, so these interruptions can be painful. They are also a part of why we don't recommend plotting plots larger than k=32 as each increment in k generally doubles the time to complete a single plot.
 
@@ -256,7 +410,13 @@ Search for the `wallet:` section. It should be near the end of the file. Edit th
   - Note 1: Replace `<Node ID>` with the actual Node ID you obtained above
   - Note 2: It doesn't matter what you enter on the right side of the colon. The argument will be ignored. Just make sure to enter something
 
+Optional (this setting ensures the node is automatically used while starting the client)
+- `full_node_peer:` the default `host:` is `localhost`. Change this to the IP address of the trusted full node (local IP if the node is on the same LAN and public IP if it is not).
+  - Note 3: The IP address can be found by reviewing your full nodes network connection information (local IP) or by searching "What's my IP" in your favorite search engine.
+
 3. Restart Chia on the computer you are connecting to the trusted node to pick up the changes.
+
+- Note 4: If you did not add the full node peer in the optional step you will need to run `chia peer wallet -a <trusted_node_ip>:8444` to manually connect to the node peer.
 
 4. To verify that the changes are working, run `chia wallet show`. The last line of the output should contain `-Trusted: True`
 
@@ -284,7 +444,47 @@ How does your wallet know it has the correct info for each address? It polls one
 
 If you believe your balance is incorrect, changing `initial_num_public_keys` is unlikely to fix the problem. If at all possible, you should sync a full node, stop Chia, delete your wallet database, and start Chia again. This time, Chia will sync based on your own node alone. If this is not an option, then resyncing from untrustred nodes might fix the problem as well.
 
+###  Where is the Chia blockchain database located? 
+
+The Chia database (db) is located in the `db/` directory inside the `.chia/mainnet/` directory. The `.chia/` directory will be found in your user's home directory. You will find the testnet database in the same `db/` directory if you are using testnet.
+
+- mainnet database filename: `blockchain_v2_mainnet.sqlite`
+- testnet database filename: `blockchain_v2_testnet10.sqlite`
+
+Windows Systems
+
+:::info
+
+To show hidden files on Windows file explorer click View \ Show \ Hidden items
+
+:::
+
+```
+C:\Users\<YOURUSERNAME>
+└─ .chia/
+    └── mainnet/
+       └─ db/
+```
+macOS and Linux Systems
+
+:::info
+
+To show hidden files on Mac finder click "COMMAND"+"SHIFT"+"." (period), on linux GNOME explorer click the carrot (small down arrow in top right) then select Show Hidden Files
+
+:::
+
+```
+/Users/<YOURUSERNAME>
+└─ .chia/
+    └── mainnet/
+       └─ db/
+```
+
 ## Farming
+
+### What is the difference between a Farmer and a Harvester? 
+
+A harvester can be thought of as a node that is an extension of your farmer. The harvester checks the plots and reports the results to the farmer, the farmer then submits the results to the blockchain. If setting up harvesters it is important to review the proper way to [farm on many machines](/farming-on-many-machines)
 
 ### How do I tell if I'm farming correctly?
 
@@ -317,7 +517,9 @@ Yes you can. Please check the [Pool Farming page](/pool-farming).
 
 ### I have heard that it's recommended that a winning plot be deleted on mainnet?
 
-There is a possible attack where an attacker who can co-ordinate N deep from the tip of the chain can try to coerce a winning farmer to re-write a historical transaction block. This attack is much more difficult and thus less of a risk in new consensus and thus we only recommend deleting and re-plotting a plot to farmers with in excess of 1PB of farm size. Anyone smaller than that would be difficult for an attacker to locate and can more safely continue to farm plots that have already won. We plan to have the software automate the process up to and including kicking off a remote plotting process if the current hardware that a farmer or harvester are on is not up to the task of re-plotting. But to repeat, deleting winning plots is, and will always be, totally optional.
+This was our advice in 2020, long before the launch of mainnet. However, we no longer advise anyone to delete their winning plots.
+
+Some background: The consensus Chia originally used during the testnet phase contained the possibility of an [attack](https://docs.chia.net/consensus-attacks#bribe-trunk) where an attacker who could co-ordinate N deep from the tip of the chain could try to coerce a winning farmer to re-write a historical transaction block. However, before the launch of mainnet, the consensus was updated; this attack is no longer viable. See the link for more details.
 
 ### Do my plots "wear out" or "go bad"/"go stale" over time? Will I have to regularly re-plot?
 
@@ -446,60 +648,6 @@ If you installed Chia for all users, then this is the location of the exe:
 C:\Program Files\Chia\Chia.exe
 ```
 
-### I installed Chia from the packaged installer. How can I invoke Chia CLI commands?
-
-When you install Chia from the packaged installer (as opposed to when you install from source), there is no virtual environment. In this case, you will need to call the executable file directly.
-
-The easiest way to accomplish this is with an alias. Run the following command(s), which depend on your operating system:
-
-:::info Chia setup
-
-<Tabs
-defaultValue="windows"
-values={[
-{label: 'Windows', value: 'windows'},
-{label: 'Linux', value: 'linux'},
-{label: 'MacOS', value: 'macos'}
-]}>
-<TabItem value="windows">
-
-Note that this only works if you installed Chia for your local user (_not_ for all users). If you installed to a non-default location, update the following command accordingly:
-
-```powershell
-Set-Alias -Name chia C:\Users\User\AppData\Local\Programs\Chia\resources\app.asar.unpacked\daemon\chia.exe
-```
-
-  </TabItem>
-  <TabItem value="linux">
-
-Alias command is not needed, but you should still run the following:
-
-```bash
-chia init --fix-ssl-permissions
-```
-
-  </TabItem>
-  <TabItem value="macos">
-
-If you installed to a non-default location, update the following command accordingly:
-
-```bash
-alias chia='/Applications/Chia.app/Contents/Resources/app.asar.unpacked/daemon/chia'
-chia init --fix-ssl-permissions
-```
-
-  </TabItem>
-</Tabs>
-
-:::
-
-After running the above command(s), run `chia version`. You should be shown the correct version. For example:
-
-```
-chia version
-1.6.1
-```
-
 ### What is the dust filter?
 
 In crypto parlance, "dust" refers to coins that have almost no value. In Chia, the smallest denomination is 1 mojo, or 1-trillionth of an XCH. Unsolicited coins of this value certainly count as dust, but even much larger coins, for example 1 million mojos, are still worth a fraction of a penny.
@@ -561,17 +709,37 @@ Unfortunately, no. However, to obtain the user-specified wallet names programmat
 
 Another way to obtain this info is by connecting to the daemon over a websocket by using `wscat`:
 
-`wscat -n --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key -c wss://localhost:55400`
+```bash
+wscat -n --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key -c wss://localhost:55400
+```
 
 From there, you can use the `get_keys` command, similar to the following example (the `request_id` can be any string):
 
-`{"ack": false, "command": "get_keys", "data": {}, "destination": "daemon", "origin": "client", "request_id": "43dc226cef76963ddd56c7068972947f373918c24b0fdf5bfa767a1340271da6"}`
+```json
+{
+  "ack": false,
+  "command": "get_keys",
+  "data": {},
+  "destination": "daemon",
+  "origin": "client",
+  "request_id": "43dc226cef76963ddd56c7068972947f373918c24b0fdf5bfa767a1340271da6"
+}
+```
 
 This command will return a payload with all of the pubkeys/fingerprints/labels -- private keys omitted.
 
 If you want the private keys included, pass `"include_secrets":true` in the data object. For example:
 
-`{"ack": false, "command": "get_keys", "data": {"include_secrets":true}, "destination": "daemon", "origin": "client", "request_id": "43dc226cef76963ddd56c7068972947f373918c24b0fdf5bfa767a1340271da6"}`
+```json
+{
+  "ack": false,
+  "command": "get_keys",
+  "data": { "include_secrets": true },
+  "destination": "daemon",
+  "origin": "client",
+  "request_id": "43dc226cef76963ddd56c7068972947f373918c24b0fdf5bfa767a1340271da6"
+}
+```
 
 ### How do I disable the dust filter?
 
@@ -586,6 +754,85 @@ Starting in version 1.7.0, Chia's reference wallet will accept both 12- and 24-w
 
 - Chia's reference wallet only allows you to _import_ a 12-word mnemonic. It does not allow you to create a new 12-word mnemonic.
 - Certain wallets use 12-word mnemonics that are not compatible with Chia's reference wallet. As far as we know, this only applies to the Pawket wallet, but there may be others as well. In the case of Pawket, you need to export a 24-word mnemonic from their app in order to use Chia's reference wallet. More info can be found on their [FAQ page](https://info.pawket.app/faq/).
+
+### How can I configure Chia to reuse the same receive address?
+
+By default, Chia will update your receive address for every new transaction. This is done for privacy reasons -- it is more difficult to associate multiple transactions with the same wallet if each transaction uses a different address.
+
+However, there are some downsides to using multiple addresses:
+
+- It can be more difficult to track the history of your own transactions. For example, block explorers cannot associate multiple addresses with the same wallet. (Note, however, that the reference wallet _will_ show you a complete history.)
+- Some wallets only search a limited number of addresses for a given key, so they may not display your full balance.
+- Wallet performance can degrade after a large number of addresses have been used. This is because the wallet must search for transactions for each address in the derivation index.
+
+Starting in version 1.7.1, Chia's reference wallet will allow you to keep the same receive address with each transaction. If you change this setting, each of the above issues will be mitigated, at the expense of reduced privacy.
+
+To set up your wallet to reuse the same receive address:
+
+1. Edit `~/.chia/mainnet/config/config.yaml`
+2. Search for `reuse_public_key_for_change:`
+
+If this parameter doesn't exist, you can add it manually. Under `wallet:` add the following two lines:
+
+```bash
+reuse_public_key_for_change:
+  '2999502625': false
+```
+
+3. `2999502625` is a dummy fingerprint that is added by default. You will need to obtain your wallet's fingerprint actual by running `chia keys show`. For example,
+
+```bash
+$ chia keys show
+Showing all public keys derived from your master seed and private key:
+
+Label: Testnet1
+Fingerprint: 2104826454
+```
+
+4. Change the dummy fingerprint to your wallet's actual fingerprint, and update the value to `true`. For example,
+
+```
+reuse_public_key_for_change:
+  '2104826454': true
+```
+
+5. If you wish to specify the behavior for more than one fingerprint, you can add additional fingerprints to new lines. If a fingerprint is not listed, the default value of `false` will be used.
+6. Restart Chia for the changes to take effect. Your wallet will now reuse the same receive address for every transaction.
+
+To verify that the same address is being reused:
+
+1. Run `chia wallet get_address -f <fingerprint>`.
+   - Replace `<fingerprint>` with the fingerprint you would like to test
+   - This command will give you the latest address for that fingerprint
+2. Run `chia wallet send -f <fingerprint> -t <address> -a 0.000000000001 -m 0.000000000001 --override`. Some notes:
+   - Replace `<fingerprint>` with fingerprint you used in step 1
+   - Replace `<address>` with the address you retrieved from step 1
+   - This command will send 1 mojo to your latest address, and attach a 1 mojo fee. Feel free to adjust these amounts accordingly. (You can also send money from the GUI.)
+   - The `--override` flag is needed because the amounts to send are considered unusual
+3. After the transaction has completed, run `chia wallet get_address -f <fingerprint>`. You should receive the same address as you received in step 1. If you received a different address, `reuse_public_key_for_change` was not set to `true` for the specified fingerprint.
+
+### What is identical spend aggregation?
+
+Identical spend aggregation is a mempool feature that allows multiple different spend bundles to spend the same coin. It is being introduced in version 1.8.2.
+
+There are two requirements for identical spend aggregation to be successful:
+1. The puzzle of the coin being spent must not contain any `AGG_SIG_ME` or `AGG_SIG_UNSAFE` conditions
+2. Each of the spend bundles that spend the coin must have identical solutions for spending that particular coin
+
+In cases where both of these requirements are met, when a farmer creates a block, it will choose one of the identical spends from the mempool as the "winner", based on which transaction pays the highest fee-per-cost. The remaining copies of that spend will then be deduplicated against the winner (they will be aggregated into a single spend). Any announcements the coin makes will then be available for any other spend to assert within the same block.
+
+### Which mempool feature does identical spend aggregation introduce?
+
+In Chia versions prior to 1.8.2, two key features were not supported by the mempool:
+
+1. The ability of a transaction to spend the output of another mempool item (i.e. inter-transaction ephemeral spends)
+2. The ability to assert an announcement made by another mempool item (i.e. inter-transaction announcements)
+
+These features both would necessitate the creation of dependency graphs, which a farmer would need to solve (and ideally optimize) when creating a block.
+
+Regarding feature 1, the only ephemeral spends that are currently supported must come from the same spend bundle. _Inter-transaction_ ephemeral spends are not yet supported as of version 1.8.2.
+
+Chia version 1.8.2 introduces identical spend aggregation, which addresses some of the use cases of Feature 2. Spends that make use of this feature are still restricted by the lack of `AGG_SIG_*` conditions, which means that anyone who needs to assert an announcement from an aggregated spend could also have spent the coin. However, this version brings Chia one step closer to offering full support for inter-transaction announcements.
 
 ---
 
@@ -625,18 +872,9 @@ You should always check the ID of the asset(s) being offered before accepting an
 Once you've created the offer, you'll need to find someone who will take the other side of it. You can share your offers through the following methods:
 
 - Send your offer file directly to another user
-- [HashGreen](https://hash.green/dex) - a decentralized exchange (DEX) that has been built upon Chia's Offers
 - [Offerbin](http://offerbin.io) - an open marketplace for Chia Offers
-- [Keybase - chia_offers](https://keybase.io/team/chia_offers) - #offers-trading channel is a forum where Chia Offers can be posted and accepted
 - [Offerpool.io](https://offerpool.io/) - an open-sourced, decentralized offers database built on top of OrbitDB and IPFS
-
-### Why am I seeing the following error when trying to share an offer to Keybase: "Failed to upload offer to Keybase:..."?
-
-Please ensure that you have joined the chia_offers group first before hitting the "share" button.
-
-### Why do I see this error in Keybase when I click to Join Chia_Offers - "This team does not exist or it has no public information available"?
-
-Ignore this error as this is a Keybase error, so long as you click on "Join Chia_offers", you will get successfully added to the team to post or view offers.
+- [dexie.space](https://dexie.space/markets) - a decentralized exchange for Chia offers supporting Chia tokens (CATs) and NFTs
 
 ### Why don't I see the offers option in my wallet?
 
@@ -678,7 +916,9 @@ Chia NFTs make use of a unique feature: [Offers](https://chialisp.com/offers). Y
 
 The CLI commands for NFT offers are almost the same as [those for CAT offers](https://chialisp.com/offers-cli-tutorial#create-a-single-token-offer). The main difference is that you have to include the NFT singleton's value after the NFT ID (typically this is `:1`). For example, to make an offer, you can run:
 
-`chia wallet make_offer -o 1:0.1 -r nft1g5gzj3hl9gdyrq83zveepf8wmeet8mxl8zutfyahs0wfkg9mcs9qepc4w5:1 -p test.offer -m 0.001`
+```bash
+chia wallet make_offer -o 1:0.1 -r nft1g5gzj3hl9gdyrq83zveepf8wmeet8mxl8zutfyahs0wfkg9mcs9qepc4w5:1 -p test.offer -m 0.001
+```
 
 The result is:
 
@@ -698,7 +938,9 @@ Use chia wallet get_offers --id 55314ee65db39c173de05873138440c48525eac39fd4a622
 
 To view your new offer, run the `get_offers` command that was output upon the offer's creation. Using the above example:
 
-`chia wallet get_offers --id 55314ee65db39c173de05873138440c48525eac39fd4a622fd766b3bb4ab02ff -f 2118200991`
+```bash
+chia wallet get_offers --id 55314ee65db39c173de05873138440c48525eac39fd4a622fd766b3bb4ab02ff -f 2118200991
+```
 
 The result is:
 
@@ -883,6 +1125,14 @@ No. Transfers are conducted without any royalties being paid.
 
 Chia Friends was an airdrop of 10,000 NFTs. While Chia Network Inc gave these NFTs to 10,000 lucky recipients for free, they currently can be bought or sold just like any other NFT. All sales include a 3% royalty, which goes to the Marmot Recovery Foundation (here's their [wallet address](https://www.spacescan.io/xch/address/xch120ywvwahucfptkeuzzdpdz5v0nnarq5vgw94g247jd5vswkn7rls35y2gc)). For more information, see the [Chia Friends website](https://www.chiafriends.xyz/).
 
+### Is Chia Friends the same as the Holiday 21 token? 
+
+No, these are two completely different projects.
+
+Chia Friends was an airdrop of 10,000 NFTs. While Chia Network Inc gave these NFTs to 10,000 lucky recipients for free, they currently can be bought or sold just like any other NFT. All sales include a 3% royalty, which goes to the Marmot Recovery Foundation (here's their [wallet address](https://www.spacescan.io/xch/address/xch120ywvwahucfptkeuzzdpdz5v0nnarq5vgw94g247jd5vswkn7rls35y2gc)). For more information, see the [Chia Friends website](https://www.chiafriends.xyz/).
+
+The Holiday 21 tokens were an airdrop of CATs for farmers who farmed a block in 2021. These tokens are redeemable for a Holiday NFT until November 10th, 2023. For more information please refer to our blog article about the [Holiday NFTs](https://www.chia.net/2022/12/08/the-holiday-nfts-are-here/).
+
 ### Can I donate directly to the Marmot Recovery Foundation?
 
 You sure can! [The Marmot Recovery Foundation website](http://marmots.org/how-you-can-help/donate-now/) lists a variety of ways to donate to the cause of saving the Vancouver Island marmot from extinction.
@@ -982,9 +1232,41 @@ From the GUI, you can sign and verify messages from the `ADVANCED` tab in the `S
 
 ### What versions of Python are supported?
 
-- Starting with Chia version 1.3.5, Python versions 3.7-3.10 are supported
-- For Chia versions prior to 1.3.5, Python 3.10 is _not_ supported. Only versions 3.7-3.9 are supported
+- Chia supports all versions of Python that have not reached their end-of-life. Starting with Chia version 2.0.0, the minimum version of Python supported is 3.8. See the [official Python version list](https://devguide.python.org/versions/) for more info.
 
+### How do I verify file checksum?
+
+Use the instructions below to verify Chia download integrity in a command line.
+Windows – Verify Checksum
+
+Run the following command:
+```
+certutil -hashfile [location of file] SHA256
+```
+For example:
+```
+certutil -hashfile C:\Users\%USERNAME%\Downloads\Setup-Win64.exe SHA256
+```
+macOS – Verify Checksum
+
+Run the following command:
+```
+shasum -a 256 [location of file]
+```
+For example:
+```
+shasum -a 256 ~/Downloads/Setup-MacOS.dmg
+```
+Linux – Verify Checksum
+
+Run the following command:
+```
+shasum -a 256 [location of file]
+```
+For example:
+```
+shasum -a 256 ~/Downloads/chia-blockchain_1.1.7_amd64.deb
+```
 ### Can I use a fast SAS HDD for storing the blockchain's database?
 
 A very high-end HDD _might_ be fast enough, but we still recommend a $30 SSD, as stated above. It can be an external SSD, connected via USB. The database is always growing, but 256 GB should be sufficient until at least 1H 2024.
@@ -1020,10 +1302,16 @@ values={[
 ]}>
 <TabItem value="windows">
 
-(Be sure to update &lt;username&gt; to match the name of the user that installed Chia.)
+(Be sure to use powershell and update &lt;username&gt; to match the name of the user that installed Chia.)
 
+If installed just for your user:
 ```powershell
-Set-Alias -Name chia C:\Users\<username>\AppData\Local\Programs\Chia\resources\app.asar.unpacked\daemon\chia.exe
+Set-Alias -Name chia "C:\Users\<USERNAME>\AppData\Local\Programs\Chia\resources\app.asar.unpacked\daemon\chia.exe"
+```
+
+If installed for all users:
+```powershell
+Set-Alias -Name chia "C:\Program Files\Chia\resources\app.asar.unpacked\daemon\chia.exe"
 ```
 
   </TabItem>
@@ -1054,6 +1342,91 @@ To test your setup, run `chia version`. You should be shown the correct version.
 chia version
 1.6.1
 ```
+
+### Where are the config and log files stored?
+
+Linux & macOS
+```
+Chia config: ~/.chia/mainnet/config/config.yaml
+Chia logs: ~/.chia/mainnet/log/
+```
+Windows
+```
+Chia config: C:\Users\%USERNAME%\.chia\mainnet\config\config.yaml
+Chia logs: C:\Users\%USERNAME%\.chia\mainnet\log\
+```
+
+### How do I change the log level to show more detail?
+
+CLI
+
+You can use the CLI command chia configure --set-log-level INFO to set your log level to the useful INFO setting. Be sure to restart Chia after making settings changes.
+Config File
+
+In `config.yaml` you can set the level of detail for your logs.
+
+Look for this section in `config.yaml`. It’s useful to change the logger setting `log_level` from `WARNING` to `INFO` to get the detail needed to troubleshoot.
+```
+logging:&id001
+log_filename: log/debug.log
+log_level: INFO
+log_stdout:false
+```
+
+### How do I quickly search the log file for errors?
+
+You can run `grep` (Linux, macOS) or `Select-String` (Windows) to search through your logs for relevant information.
+
+
+Linux & macOS
+```
+cat ~/.chia/mainnet/log/debug.log | grep -i 'error'
+```
+
+Windows
+```
+Get-Content -Path "~\.chia\mainnet\log\debug.log" | Select-String -Pattern "error"
+```
+
+#### Harvester log lookup examples
+
+The time it takes to do a proof challenge should be below 30 seconds. If you see higher times, something is wrong with your setup.
+
+Here are some example commands you can use to examine `debug.log` for problems.
+
+Linux & macOS
+```
+tail ~/.chia/mainnet/log/debug.log | grep eligible
+```
+Windows
+```
+Select-String -Path "~\.chia\mainnet\log\debug*" -Pattern "eligible"
+Select-String -Path "~\.chia\mainnet\log\debug*" -Pattern "Found [^0] proof"
+Select-String -Path "~\.chia\mainnet\log\debug*" -Pattern "Farmed unfinished_block"
+Get-Content -Path "~\.chia\mainnet\log\debug.log" -Wait | Select-String -Pattern "found"
+```
+### What is the difference between chia and Chia (chia capitalization)?
+
+Chia - depending on context, this can refer to Chia Network the company, the Chia software (Chia client), or the Chia blockchain
+chia - lowercase chia refers to the Chia token, XCH. Similarly, mojos are lowercase.
+
+### How can I use PFX certificates for .NET development on Windows?
+
+By default, Chia will install `.crt` certificates in `~/.chia/mainnet/config/ssl`. If you are a .NET developer who is developing an application that connects to a full node, it is much easier to do this with `.pfx` certificates. This is because the TLS layer on Windows requires that the private key be written to disk (in a particular way). The PEM-based certificate loading doesn't do that, only PFX-loading does.
+
+We plan to add `.pfx` certificates by default in a future version of Chia. However, for now there is an easy workaround -- export the certificates to `.pfx` and immediately reimport them. The command to do this in c# is:
+
+```
+cert = new X509Certificate2(cert.Export(X509ContentType.Pfx))
+```
+
+See [this stackoverflow thread](https://stackoverflow.com/questions/72096812/loading-x509certificate2-from-pem-file-results-in-no-credentials-are-available) for more info.
+
+:::info
+
+This issue only affects developers of Windows .NET applications. It does not affect Chia users on Windows, nor does it affect users or developers on other Operating Systems.
+
+:::
 
 ### What are the plans for the project and what are its tokenomics?
 

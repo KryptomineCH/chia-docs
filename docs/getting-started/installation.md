@@ -1,5 +1,5 @@
 ---
-title: Installation
+title: Installation Details
 slug: /installation
 ---
 
@@ -8,13 +8,23 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-There are various ways to install Chia. The best method depends on what you intend to do.
+:::info
 
-If you plan to use Chia as a wallet or to run a farm on a personal computer, we recommend installing the GUI from our [official downloads page](https://www.chia.net/downloads). The best way to install the GUI on Linux is the command line, [as described below](#using-the-cli). The GUI is the simplest way to interact with the Chia client.
+This page will go into the details of the various different ways to install Chia. If you already installed Chia as part of the Farming Guide, then feel free to skip ahead to the [Plotting Basics](/plotting-basics) page.
 
-However, if you intend to run a Chia full node on a server and connect to it programatically using the [RPC interface](/rpc), the best method would be to install and run Chia on the command line.
+:::
 
-Finally, if you plan on making contributions to the source code or doing [Chialisp](https://chialisp.com) development, we recommend installing Chia from source. This gives the highest level of flexibility.
+There are various ways to install Chia, with the best method depending on what you intend to do:
+
+- If you simply wish to use the Chia wallet, or to run a farm on a single personal computer, then we recommend installing the GUI from our [official downloads page](https://www.chia.net/downloads) for Windows and MacOS, and for Linux users to install the package [as described below](#using-the-cli). The GUI is the simplest way to interact with the Chia client and ideal for most non-developer use cases.
+
+- If you intend to run a dedicated Chia full node on a server and connect to it programmatically using the [RPC interface](/rpc), the best method would be to install and run Chia via the command line on a proper server environment.
+
+- If you intend to do [Chialisp](https://chialisp.com) development or build projects that leverage Chia, you have the options of either using an installer (the recommended pattern), or installing from source.
+
+- Lastly, if you plan on making contributions to the source code, then installing Chia from source would be your path.
+
+___In summary, unless you already knew before reading this page that you should be installing from source, chances are your best path will be to install from our [official downloads page](https://www.chia.net/downloads) or a Linux package, depending on your OS.___
 
 ## System Requirements
 
@@ -22,15 +32,18 @@ The minimum supported specs are that of the Raspberry Pi 4, 4GB model:
 
 - Quad core 1.5Ghz CPU (must be 64 bit)
 - 4 GB RAM
-- Python versions between 3.7 and 3.10 are supported
+- As of Chia version 2.0, Python versions 3.8 and later are supported
 
 ### Drive Format
 
 Chia plot files are at least 108GB in size (for K32). To plot successfully requires drives formatted to support large files. Formats that will work include NTFS, APFS, exFAT, and ext4. Do not use drives with FAT formatting (for example FAT12, FAT16, and FAT32), or else plotting will fail. Future versions of Chia will check for unsupported drives, but for now it's up to each user to check their drive format.
 
+- - - - -
+
 ## Install
 
 ### Using the CLI
+_This method is intended for linux environments_
 
 ```mdx-code-block
 <Tabs
@@ -127,7 +140,7 @@ Chia strives to provide [binary wheels](https://pythonwheels.com) for modern sys
 ```
 
 ### From Source
-
+_This method is primarily intended for contributing to the Chia codebase_
 ```mdx-code-block
 <Tabs
   defaultValue="linux-macos"
@@ -329,7 +342,7 @@ sudo apt-get install -y build-essential python3-dev
 # If you are not using Raspbian 64, add this
 export PIP_EXTRA_INDEX_URL=https://www.piwheels.org/simple/
 
-# Make sure you have 64-bit Python between versions 3.7 and 3.10
+# Make sure you have 64-bit Python 3.8 or later
 python3 -c 'import platform; print(platform.architecture())'
 ```
 
@@ -352,6 +365,8 @@ However, if you install Chia in some other way, disable the timelord build proce
 ```bash
 export BUILD_VDF_CLIENT=N
 ```
+
+- - - - -
 
 ## Directory Structure
 
@@ -376,9 +391,11 @@ The config file under the `config` subdirectory. Its name is `config.yaml`, and 
 
 It is possible to configure the `CHIA_ROOT` environment variable to another location. A common use for this would be to switch it to `~/.chia/testnet` to have a separate config for the testnet.
 
-## CLI Setup
+- - - - -
 
-Using the CLI gives greater and more precise control over the various Chia services such as the full node. For a more details on the commands, read the [CLI Reference](/cli).
+## CLI
+
+Using the CLI gives greater and more precise control over the various Chia services such as the full node. As of 1.8.2, when installing from an installer or package CLI commands will be automatically added to your path for Windows and Linux. For more details on the commands, read the [CLI Reference](/cli).
 
 ````mdx-code-block
 <Tabs>
@@ -408,19 +425,6 @@ The CLI commands are stored in the following location:
 ```bash
 ~\AppData\Local\Programs\Chia\resources\app.asar.unpacked\daemon
 ```
-
-To be able to use these commands without going to that directory in the terminal, add it to the path.
-
-This can be done by doing the following:
-
-- Right-click on the Start menu
-- Click on "System"
-- Click "Advanced system settings"
-- Click "Environment variables"
-- Double-click "Path"
-- Click "Add"
-- Enter the path shown above
-
 </TabItem>
 <TabItem value="Linux" label="Linux">
 
@@ -435,23 +439,13 @@ If you installed Chia with the Linux installer files, the CLI commands are store
 /lib/chia-blockchain/resources/app.asar.unpacked/daemon/chia
 ```
 
-To be able to use these commands without going to that directory in the terminal, add it to the path.
-
-This can be done by running either of the following commands, depending on which path is used:
-
-```bash
-export PATH=/usr/lib/chia-blockchain/resources/app.asar.unpacked/daemon/chia:$PATH
-export PATH=/lib/chia-blockchain/resources/app.asar.unpacked/daemon/chia:$PATH
-```
-
-To load this on startup, add it to the `.bashrc`, `.bash_profile`, or `.zshrc` file depending on which is used by the shell.
 </TabItem>
 </Tabs>
 ````
 
-### Install GUI
+### GUI
 
-The GUI is a simpler method of interacting with Chia, and it can be installed manually from the CLI.
+The GUI is the most user friendly method of interacting with Chia for non-developer uses, and it can be installed manually from the CLI if you installed from source.
 
 ````mdx-code-block
 <Tabs>
@@ -529,7 +523,7 @@ Start-Process -NoNewWindow npm run electron
 
 ### Initial Startup
 
-Whereas the GUI will set everything up automatically, the setup needs to be done manually on the CLI.
+Upon launch the GUI will set everything up automatically, however if installing from source then the initial setup needs to be done manually via the CLI.
 
 First, initialize the Chia configuration files:
 

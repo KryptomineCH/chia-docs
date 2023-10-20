@@ -11,12 +11,13 @@ slug: /references
 
 ## Chia's Technical Specs
 
-- [Chia's green paper](https://www.chia.net/assets/ChiaGreenPaper.pdf "Chia's Green Paper") -- showcases Proofs of Space and Time
+- [Chia's green paper](https://docs.chia.net/green-paper-abstract "Chia's Green Paper") -- showcases Proofs of Space and Time
 - [Proofs of Space specification](https://www.chia.net/assets/Chia_Proof_of_Space_Construction_v1.1.pdf)
 - [BLS Signatures](https://github.com/Chia-Network/bls-signatures "Chia's BLS Signatures on GitHub")
 - [Verifiable Delay Function (VDF)](https://github.com/Chia-Network/chiavdf "Chia's VDF on GitHub")
 - [Proofs of Space](https://github.com/Chia-Network/chiapos "Chia's Proof of Space repository on GitHub")
 - [Binary Quadratic Forms](https://github.com/Chia-Network/vdf-competition/blob/main/classgroups.pdf 'Binary quadratic forms white paper, by Lipa Long') -- a white paper by Lipa Long
+- [How to Store a Permutation Compactly](https://hackmd.io/@dabo/rkP8Pcf9t) by Bram Cohen and Dan Boneh
 
 ## Video
 
@@ -31,6 +32,7 @@ slug: /references
 ## External
 
 - [Chia's power consumption](https://chiapower.org "Chia's energy consumption statistics")
+- [BladeBit CUDA Performance Analysis](https://scienceofmining.com/20230828-BladeBit/BladeBit%20CUDA%20Performance%20Analysis-1.html), by scienceofmining.com
 - [A Survey of Two Verifiable Delay Functions](https://eprint.iacr.org/2018/712.pdf 'The underlying technology of Proof of Time'), by our advisors Dan Boneh, Benedikt Bünz, and Ben Fisch
 - [Simple Verifiable Delay Functions](https://eprint.iacr.org/2018/627.pdf 'The basis for Proof of Time'), by our advisor Krzysztof Pietrzak
 - [History of Cryptography](https://cs.stanford.edu/people/eroberts/courses/soco/projects/public-key-cryptography/history.html#:~:text=The%20idea%20of%20public%20key,known%20as%20the%20knapsack%20problem), from Stanford University

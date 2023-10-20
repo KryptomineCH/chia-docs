@@ -1,4 +1,5 @@
 ---
+sidebar_label: Intro to Chia
 title: Introduction
 slug: /introduction
 ---
@@ -10,6 +11,8 @@ Chia is a cryptocurrency and blockchain with smart transaction capabilities. It 
 Its [Proof of Space and Time](/consensus-intro) is the only Nakamoto consensus algorithm since Proof of Work, while also having a [much lower energy consumption](https://chiapower.org). Part of Chia's vision involves improving the carbon footprint of the blockchain industry.
 
 Chia's mainnet was launched on March 19, 2021. Development of its ecosystem is ongoing, with primitives released for [CATs](https://chialisp.com/cats), [NFTs](https://chialisp.com/nfts), [Offers](https://chialisp.com/offers), and [DIDs](https://chialisp.com/dids).
+
+This page will give a brief overview of Chia and its various components. If you are interested in becoming a Chia farmer, feel free to skip ahead to the [Beginner's Guide to Farming](/farming-guide).
 
 ## Proof of Space and Time
 
@@ -48,7 +51,7 @@ There are many other innovations in Chia, some of which include:
 - **BLS signatures**, which allow aggregating all of a block's signatures together.
 - **Scalability and performance** improvements, which allow running a Chia node on a Raspberry Pi.
 - **Weight proofs and light clients**, which enable fast syncing from a mobile device. For more info, see [light clients](/light-clients).
-- **Chia Asset Tokens** (CATs) are fungible tokens that can be minted from standard XCH. The possiblilties are endless! [Read more on CATs](https://chialisp.com/cats) or watch a [CATs video intro](https://www.youtube.com/watch?v=yxagP_VC8BE). Additionally, a community member has created [TAIL Database](https://www.taildatabase.com/ 'TAIL database'), which contains a list of CATs in the wild.
+- **Chia Asset Tokens** (CATs) are fungible tokens that can be minted from standard XCH. The possibilities are endless! [Read more on CATs](https://chialisp.com/cats) or watch a [CATs video intro](https://www.youtube.com/watch?v=yxagP_VC8BE). Additionally, a community member has created [TAIL Database](https://www.taildatabase.com/ 'TAIL database'), which contains a list of CATs in the wild.
 - **Offer files** enable the peer-to-peer exchange of assets, including standard XCH, as well as CATs. [Read more on Offers](https://chialisp.com/offers) or watch a [brief intro video](https://youtu.be/Z2FoZSNtttM 'Offers intro on YouTube').
 - **NFTs** enable and drive real-world applications of digital ownership through true marketplace independence, consistent provenance, and digital permanence. We laid out our [vision for NFTs on Chia](https://www.chia.net/2022/05/11/our-vision-for-chia-nfts.en.html) and launched our [NFT1 standard](https://www.chia.net/2022/06/29/1.4.0-introducing-the-chia-nft1-standard.en.html) in June 2022.
 - This documentation will explain the motivation and implementation of the different components of the Chia system to a technical audience, and provide in-depth explanations of how everything works. If you would like to skip to how to make dApps (decentralized apps) on Chia, please visit the [Chialisp](https://chialisp.com) website.

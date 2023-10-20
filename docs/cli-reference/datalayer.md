@@ -48,6 +48,7 @@ Options:
 | -u            | --url           | TEXT    | False    | A URL where the mirror will reside. Can be repeated to add multiple URLs in the same command                                              |
 | -m            | --fee           | TEXT    | False    | Set the fees for the transaction, in XCH                                                                                                  |
 | -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under wallet in config.yaml                                   |
+| -f            | --fingerprint   | INTEGER | False    | Fingerprint of the wallet to use                                                                                                          |
 | -h            | --help          | None    | False    | Show a help message and exit                                                                                                              |
 
 <details>
@@ -82,8 +83,9 @@ Options:
 | -i            | --ids           | TEXT    | True     | The hexadecimal store id(s)                                                                                                                  |
 | -o            | --override      | None    | False    | If set, will overwrite files that already exist (default: not set)                                                                           |
 | -n            | --no-override   | None    | False    | If set, will not overwrite files that already exist (default: set)                                                                           |
-| -f            | --foldername    | TEXT    | False    | The name of the folder where the files to be restored are located (default: `~/.chia/mainnet/data_layer/db/server_files_location_<network>`) |
+| -d            | --directory     | TEXT    | False    | If specified, use a non-default directory to write the files (default: `~/.chia/mainnet/data_layer/db/server_files_location_<network>`)      |
 | -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml                                  |
+| -f            | --fingerprint   | INTEGER | False    | Fingerprint of the wallet to use                                                                                                             |
 | -h            | --help          | None    | False    | Show a help message and exit                                                                                                                 |
 
 <details>
@@ -150,6 +152,50 @@ Response:
 
 ---
 
+### `clear_pending_roots`
+
+Functionality: Clear pending roots that will not be published, associated data may not be recoverable
+
+Usage: `chia data clear_pending_roots [OPTIONS]`
+
+Options:
+
+| Short Command | Long Command    | Type    | Required | Description                                                                                                 |
+| :------------ | :-------------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------- |
+| -i            | --id            | TEXT    | True     | The ID of the store from which to clear the pending roots                                                   |
+|               | --yes           | None    | False    | Set to confirm the action without prompting [Default: not set / prompt to confirm]                          |
+| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml |
+| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                          |
+| -h            | --help          | None    | False    | Show a help message and exit                                                                                |
+
+
+<details>
+<summary>Example</summary>
+
+To clear all pending roots, you need to enter the store ID. An example of this which also disables prompting:
+
+```bash
+chia data clear_pending_roots -i 2772c8108e19f9fa98ff7bc7d4bafd821319bc90af6b610d086b85f4c21fa816 --yes
+```
+
+Response:
+
+```bash
+{
+    "root": {
+        "generation": 1,
+        "node_hash": "e488fa1bf0f712b224df0daf312b3d479f80e3a330d4bebd8f26a0d52dc0ebbb",
+        "status": 1,
+        "tree_id": "2772c8108e19f9fa98ff7bc7d4bafd821319bc90af6b610d086b85f4c21fa816"
+    },
+    "success": true
+}
+```
+
+</details>
+
+---
+
 ### `create_data_store`
 
 Functionality: Create a data store. Triggers a Chia transaction
@@ -160,9 +206,10 @@ Options:
 
 | Short Command | Long Command    | Type    | Required | Description                                                                                                 |
 | :------------ | :-------------- | :------ | :------: | :---------------------------------------------------------------------------------------------------------- |
-| -f            | --fingerprint   | INTEGER |  False   | Set the fingerprint to specify which wallet to use                                                          |
 | -dp           | --data-rpc-port | INTEGER |  False   | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml |
 | -m            | --fee           | TEXT    |  False   | Set the fees for the transaction, in XCH                                                                    |
+|               | --verbose       | None    |  False   | Set to enable verbose output                                                                                |
+| -f            | --fingerprint   | INTEGER |  False   | Set the fingerprint to specify which wallet to use                                                          |
 | -h            | --help          | None    |  False   | Show a help message and exit                                                                                |
 
 <details>
@@ -313,6 +360,7 @@ Options:
 | -c            | --coin_id       | TEXT    | True     | The coin_id of the mirror to delete (obtainable from the [get_mirrors](#get_mirrors) command)               |
 | -m            | --fee           | TEXT    | False    | Set the fees for the transaction, in XCH                                                                    |
 | -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml |
+| -f            | --fingerprint   | INTEGER |  False   | Set the fingerprint to specify which wallet to use                                                          |
 | -h            | --help          | None    | False    | Show a help message and exit                                                                                |
 
 <details>
@@ -343,8 +391,9 @@ Options:
 | Short Command | Long Command    | Type    | Required | Description                                                                                                 |
 | :------------ | :-------------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------- |
 | -store        | --id            | TEXT    | True     | The hexadecimal store id                                                                                    |
-| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                          |
+| -r            | --root_hash     | TEXT    | False    | The hexadecimal root hash                                                                                   |
 | -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml |
+| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                          |
 | -h            | --help          | None    | False    | Show a help message and exit                                                                                |
 
 <details>
@@ -370,119 +419,6 @@ Response:
 
 ---
 
-### `get_mirrors`
-
-Functionality: List all mirrors for a store ID
-
-Usage: `chia data get_mirrors [OPTIONS]`
-
-Options:
-
-| Short Command | Long Command    | Type    | Required | Description                                                                                             |
-| :------------ | :-------------- | :------ | :------- | :------------------------------------------------------------------------------------------------------ |
-| -i            | --id            | TEXT    | True     | The hexadecimal ID of the store for which to get mirrors                                                |
-| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under wallet in config.yaml |
-| -h            | --help          | None    | False    | Show a help message and exit                                                                            |
-
-<details>
-<summary>Example</summary>
-
-```bash
-chia data get_mirrors -i 1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f
-```
-
-Response:
-
-```
-{
-    'mirrors': [
-        {
-            'amount': 1000,
-            'coin_id': 'b5756487c17fe3a2628e45a9d3d42e89231af718bb1735e6c8441e07ec005f9d',
-            'launcher_id': '1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f',
-            'ours': True,
-            'urls': [
-                'http://www.example.com:8575',
-                'http://www.example2.com:8575'
-            ]
-        }
-    ],
-    'success': True
-}
-```
-
-</details>
-
----
-
-### `get_value`
-
-Functionality: Get a value from a Store's key
-
-Usage: `chia data get_value`
-
-Options:
-
-| Short Command | Long Command    | Type    | Required | Description                                                                                                 |
-| :------------ | :-------------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------- |
-| -store        | --id            | TEXT    | True     | The hexadecimal store id                                                                                    |
-|               | --key           | TEXT    | True     | The hexadecimal key                                                                                         |
-| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                          |
-| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml |
-| -h            | --help          | None    | False    | Show a help message and exit                                                                                |
-
-<details>
-<summary>Example</summary>
-
-```bash
-chia data get_value --id 1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f --key 0004
-```
-
-Response:
-
-```
-{
-    'success': True,
-    'value': '0123456789abcdef'
-}
-```
-
-</details>
-
----
-
-### `remove_subscription`
-
-Functionality: Remove one or more URLs from a data store to which you subscribe. Note that this action will not remove the subscription to the data store itself. For that functionality, use [unsubscribe](#unsubscribe)
-
-Usage: `chia data remove_subscription [OPTIONS]`
-
-Options:
-
-| Short Command | Long Command    | Type    | Required | Description                                                                                             |
-| :------------ | :-------------- | :------ | :------- | :------------------------------------------------------------------------------------------------------ |
-| -store        | --id            | TEXT    | True     | The hexadecimal ID of the store to which you would like to subscribe                                    |
-| -u            | --url           | TEXT    | False    | A URL where the data store resides. This argument can be used multiple times in the same command        |
-| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under wallet in config.yaml |
-| -h            | --help          | None    | False    | Show a help message and exit                                                                            |
-
-<details>
-<summary>Example</summary>
-
-```bash
-chia data remove_subscription -store 8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d -u http://www.example.com:8575
-```
-
-Response:
-
-```
-None
-```
-
-</details>
-
----
-
 ### `get_keys_values`
 
 Functionality: Get all keys and values for a store. Must be subscribed to store ID
@@ -494,8 +430,9 @@ Options:
 | Short Command | Long Command    | Type    | Required | Description                                                                                                 |
 | :------------ | :-------------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------- |
 | -store        | --id            | TEXT    | True     | The hexadecimal store id                                                                                    |
-| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                          |
+| -r            | --root_hash     | TEXT    | False    | The hexadecimal root hash                                                                                   |
 | -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml |
+| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                          |
 | -h            | --help          | None    | False    | Show a help message and exit                                                                                |
 
 <details>
@@ -531,6 +468,562 @@ Response:
 
 ---
 
+### `get_kv_diff`
+
+Functionality: Get the kv diff between two hashes within the same store ID
+
+Usage: `chia data get_kv_diff [OPTIONS]`
+
+Options:
+
+| Short Command | Long Command    | Type    | Required | Description                                                                                                 |
+| :------------ | :-------------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------- |
+| -store        | --id            | TEXT    | True     | The hexadecimal store ID                                                                                    |
+| -hash_1       | --hash_1        | TEXT    | True     | The first hash to compare                                                                                   |
+| -hash_2       | --hash_2        | TEXT    | True     | The second hash to compare                                                                                  |
+| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml |
+| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                          |
+| -h            | --help          | None    | False    | Show a help message and exit                                                                                |
+
+<details>
+<summary>Example</summary>
+
+```bash
+chia data get_kv_diff --id 1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f -hash_1 0x26e60dd9b493eee1f6781fc13dd025e0bfafcde5a103c95dd087d91bd848d406 -hash_2 0xc2dc94c2a85d7db4cfdd1d907bcc441c8fce595db2e2075b973fb8171e2f19a2
+```
+
+Response:
+
+```
+{
+    'diff': [
+        {
+            'key': '0005',
+            'type': 'INSERT',
+            'value': 'beadfeed'
+        },
+        {
+            'key': '0004',
+            'type': 'DELETE',
+            'value': '0123456789abcdef'
+        }
+    ],
+    'success': True
+}
+```
+
+</details>
+
+---
+
+### `get_mirrors`
+
+Functionality: List all mirrors for a store ID
+
+Usage: `chia data get_mirrors [OPTIONS]`
+
+Options:
+
+| Short Command | Long Command    | Type    | Required | Description                                                                                             |
+| :------------ | :-------------- | :------ | :------- | :------------------------------------------------------------------------------------------------------ |
+| -i            | --id            | TEXT    | True     | The hexadecimal ID of the store for which to get mirrors                                                |
+| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under wallet in config.yaml |
+| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                      |
+| -h            | --help          | None    | False    | Show a help message and exit                                                                            |
+
+<details>
+<summary>Example</summary>
+
+```bash
+chia data get_mirrors -i 1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f
+```
+
+Response:
+
+```
+{
+    'mirrors': [
+        {
+            'amount': 1000,
+            'coin_id': 'b5756487c17fe3a2628e45a9d3d42e89231af718bb1735e6c8441e07ec005f9d',
+            'launcher_id': '1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f',
+            'ours': True,
+            'urls': [
+                'http://www.example.com:8575',
+                'http://www.example2.com:8575'
+            ]
+        }
+    ],
+    'success': True
+}
+```
+
+</details>
+
+---
+
+### `get_owned_stores`
+
+Functionality: Get owned stores
+
+Usage: `chia data get_owned_stores [OPTIONS]`
+
+Options:
+
+| Short Command | Long Command    | Type    | Required | Description                                                                                             |
+| :------------ | :-------------- | :------ | :------- | :------------------------------------------------------------------------------------------------------ |
+| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under wallet in config.yaml |
+| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                      |
+| -h            | --help          | None    | False    | Show a help message and exit                                                                            |
+
+<details>
+<summary>Example</summary>
+
+```bash
+chia data get_owned_stores
+```
+
+Response:
+
+```
+{
+    'store_ids': [
+        '39114b28a3674b6c2c0ed65d3518842fd17f9df46794f49cd223f9f3a463f09d',
+        '5d8f5c88f27804f5c387e070403faece14acb74460bbf7d47739178a3774eff3',
+        '77e9c21be435dded6e8c9b32e93b2b880665f5b34f860a642f22d3fa500ce457',
+        '9d0c65e77c750eac28b3fa78e57cdcec59fe53448eb59bdfbfa694d89f262b4b'
+    ],
+    'success': True
+}
+```
+
+</details>
+
+---
+
+### `get_root`
+
+Functionality: Get the Merkle Root and timestamp of a given store ID
+
+Usage: `chia data get_root [OPTIONS]`
+
+Options:
+
+| Short Command | Long Command    | Type    | Required | Description                                                                                                 |
+| :------------ | :-------------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------- |
+| -store        | --id            | TEXT    | True     | The hexadecimal store id                                                                                    |
+| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml |
+| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                          |
+| -h            | --help          | None    | False    | Show a help message and exit                                                                                |
+
+<details>
+<summary>Example</summary>
+
+```bash
+chia data get_root --id 1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f
+```
+
+Response:
+
+```
+{
+    'confirmed': True,
+    'hash': '0xd6d6b4d6bbd77aaa5927c8a21a1451b35f4860a7f9a58e51dae04037da9c08e8',
+    'success': True,
+    'timestamp': 1661148611
+}
+```
+
+</details>
+
+---
+
+### `get_root_history`
+
+Functionality: Get a history of root hashes for a Store ID that you subscribe to
+
+Usage: `chia data get_root_history [OPTIONS]`
+
+Options:
+
+| Short Command | Long Command    | Type    | Required | Description                                                                                                 |
+| :------------ | :-------------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------- |
+| -store        | --id            | TEXT    | True     | The hexadecimal store id                                                                                    |
+| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml |
+| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                          |
+| -h            | --help          | None    | False    | Show a help message and exit                                                                                |
+
+<details>
+<summary>Example</summary>
+
+```bash
+chia data get_root_history --id 1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f
+```
+
+Response:
+
+```
+{
+    'root_history': [
+        {
+            'confirmed': True,
+            'root_hash': '0x0000000000000000000000000000000000000000000000000000000000000000',
+            'timestamp': 1661141342
+        },
+        {
+            'confirmed': True,
+            'root_hash': '0xe488fa1bf0f712b224df0daf312b3d479f80e3a330d4bebd8f26a0d52dc0ebbb',
+            'timestamp': 1661144917
+        },
+        {
+            'confirmed': True,
+            'root_hash': '0x0000000000000000000000000000000000000000000000000000000000000000',
+            'timestamp': 1661145223
+        },
+        {
+            'confirmed': True,
+            'root_hash': '0xb5420e65846ded936d1e4855c066247fc461a3b281cd9e0e69f3cfa4df529ba2',
+            'timestamp': 1661145404
+        },
+        {
+            'confirmed': True,
+            'root_hash': '0xd6d6b4d6bbd77aaa5927c8a21a1451b35f4860a7f9a58e51dae04037da9c08e8',
+            'timestamp': 1661148611
+        }
+    ],
+    'success': True
+}
+```
+
+</details>
+
+---
+
+### `get_subscriptions`
+
+Functionality: Get subscribed stores, including the owned stores
+
+Usage: `chia data get_subscriptions [OPTIONS]`
+
+Options:
+
+| Short Command | Long Command    | Type    | Required | Description                                                                                                 |
+| :------------ | :-------------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------- |
+| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml |
+| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                          |
+| -h            | --help          | None    | False    | Show a help message and exit                                                                                |
+
+<details>
+<summary>Example</summary>
+
+```bash
+chia data get_subscriptions
+```
+
+Response:
+
+```
+{
+    'store_ids': [
+        'ba934d7f4ad47c34cb1a99d3c57adacb1883cff5528cca67c34f724f3560e401',
+        '9d0c65e77c750eac28b3fa78e57cdcec59fe53448eb59bdfbfa694d89f262b4b',
+        '39114b28a3674b6c2c0ed65d3518842fd17f9df46794f49cd223f9f3a463f09d',
+        '77e9c21be435dded6e8c9b32e93b2b880665f5b34f860a642f22d3fa500ce457',
+        '5d8f5c88f27804f5c387e070403faece14acb74460bbf7d47739178a3774eff3',
+        'a101396917a68f79e9119eaef738162d73e23b43e952561f21bdb1a1c171df89',
+        '0f2257618880bf2a6d8d3c223147e06fa547520802e44a5359d240cdf0b9dbe7'
+    ],
+    'success': True
+}
+```
+
+</details>
+
+---
+
+### `get_sync_status`
+
+Functionality: Get locally stored root compared to the root of the singleton
+
+Usage: `chia data get_sync_status [OPTIONS]`
+
+Options:
+
+| Short Command | Long Command    | Type    | Required | Description                                                                                                 |
+| :------------ | :-------------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------- |
+| -store        | --id            | TEXT    | True     | The hexadecimal store id                                                                                    |
+| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml |
+| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                          |
+| -h            | --help          | None    | False    | Show a help message and exit                                                                                |
+
+If the `root_hash` matches the `target_root_hash`, then the store is synced.
+
+<details>
+<summary>Example</summary>
+
+```bash
+chia data get_sync_status -store 39114b28a3674b6c2c0ed65d3518842fd17f9df46794f49cd223f9f3a463f09d
+```
+
+Response:
+
+```
+{
+    'success': True,
+    'sync_status': {
+        'generation': 1,
+        'root_hash': '532d8df550bdbdef28c1a7b27eaefc812afb99eabd59b3c041000c7ea352e900',
+        'target_generation': 1,
+        'target_root_hash': '532d8df550bdbdef28c1a7b27eaefc812afb99eabd59b3c041000c7ea352e900'
+    }
+}
+```
+
+</details>
+
+---
+
+### `get_value`
+
+Functionality: Get a value from a Store's key
+
+Usage: `chia data get_value [OPTIONS]`
+
+Options:
+
+| Short Command | Long Command    | Type    | Required | Description                                                                                                 |
+| :------------ | :-------------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------- |
+| -store        | --id            | TEXT    | True     | The hexadecimal store id                                                                                    |
+| -h            | --key           | TEXT    | True     | The hexadecimal key                                                                                         |
+| -r            | --root_hash     | TEXT    | False    | The hexadecimal root hash                                                                                   |
+| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml |
+| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                          |
+|               | --help          | None    | False    | Show a help message and exit                                                                                |
+
+<details>
+<summary>Example</summary>
+
+```bash
+chia data get_value --id 1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f --key 0004
+```
+
+Response:
+
+```
+{
+    'success': True,
+    'value': '0123456789abcdef'
+}
+```
+
+</details>
+
+---
+
+### `plugins`
+
+Functionality: Get information about configured uploader/downloader plugins
+
+Usage: `chia data plugins [OPTIONS] COMMAND [ARGS]...`
+
+Commands: `check` (Calls the plugin_info endpoint on all configured plugins)
+
+Options:
+
+| Short Command | Long Command    | Type    | Required | Description                                                                                                 |
+| :------------ | :-------------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------- |
+| -h            | --help          | None    | False    | Show a help message and exit                                                                                |
+
+Note that currently `check` is the only sub-command under the `plugins` command. This command is shown in the example.
+
+<details>
+<summary>Example</summary>
+
+```bash
+chia data plugins check
+```
+
+Response:
+
+```bash
+{
+    "plugin_status": {
+        "downloaders": {},
+        "uploaders": {}
+    },
+    "success": true
+}
+```
+
+</details>
+
+---
+
+### `remove_subscription`
+
+Functionality: Remove one or more URLs from a data store to which you subscribe. Note that this action will not remove the subscription to the data store itself. For that functionality, use [unsubscribe](#unsubscribe)
+
+Usage: `chia data remove_subscription [OPTIONS]`
+
+Options:
+
+| Short Command | Long Command    | Type    | Required | Description                                                                                             |
+| :------------ | :-------------- | :------ | :------- | :------------------------------------------------------------------------------------------------------ |
+| -store        | --id            | TEXT    | True     | The hexadecimal ID of the store to which you would like to subscribe                                    |
+| -u            | --url           | TEXT    | False    | A URL where the data store resides. This argument can be used multiple times in the same command        |
+| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under wallet in config.yaml |
+| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                      |
+| -h            | --help          | None    | False    | Show a help message and exit                                                                            |
+
+<details>
+<summary>Example</summary>
+
+```bash
+chia data remove_subscription -store 8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d -u http://www.example.com:8575
+```
+
+Response:
+
+```
+None
+```
+
+</details>
+
+---
+
+### `subscribe`
+
+Functionality: Subscribe to a store ID
+
+Usage: `chia data subscribe [OPTIONS]`
+
+Options:
+
+| Short Command | Long Command    | Type    | Required | Description                                                                                             |
+| :------------ | :-------------- | :------ | :------- | :------------------------------------------------------------------------------------------------------ |
+| -store        | --id            | TEXT    | True     | The hexadecimal ID of the store to which you would like to subscribe                                    |
+| -u            | --url           | TEXT    | False    | A URL where the data store resides. This argument can be used multiple times in the same command        |
+| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under wallet in config.yaml |
+| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                      |
+| -h            | --help          | None    | False    | Show a help message and exit                                                                            |
+
+<details>
+<summary>Example 1</summary>
+
+Subscribe to a data store without specifying any URLs:
+
+```bash
+chia data subscribe -store 8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d
+```
+
+Response:
+
+```
+None
+```
+
+Use the `subscriptions` RPC to list all current subscriptions:
+
+```bash
+chia rpc data_layer subscriptions
+```
+
+Response:
+
+```bash
+{
+    "store_ids": [
+        "1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f",
+        "8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d"
+    ],
+    "success": true
+}
+```
+
+</details>
+
+<details>
+<summary>Example 2</summary>
+
+Subscribe to a data store using multiple URLs where that store resides:
+
+```bash
+chia data subscribe -store 8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d -u http://www.example.com:8575 -u http://www.example2.com:8575
+```
+
+Response:
+
+```
+None
+```
+
+Use the `subscriptions` RPC to list all current subscriptions:
+
+```bash
+chia rpc data_layer subscriptions
+```
+
+Response:
+
+```bash
+{
+    "store_ids": [
+        "1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f",
+        "8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d"
+    ],
+    "success": true
+}
+```
+
+</details>
+
+---
+
+### `unsubscribe`
+
+Functionality: Unsubscribe from a store ID
+
+Usage: `chia data unsubscribe [OPTIONS]`
+
+Options:
+
+| Short Command | Long Command    | Type    | Required | Description                                                                                             |
+| :------------ | :-------------- | :------ | :------- | :------------------------------------------------------------------------------------------------------ |
+| -store        | --id            | TEXT    | True     | The hexadecimal ID of the store to which you would like to unsubscribe                                  |
+| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under wallet in config.yaml |
+| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                      |
+|               | --retain        | None    | False    | Retain local .dat files [Default: false (don't retain data)]                                            |
+| -h            | --help          | None    | False    | Show a help message and exit                                                                            |
+
+:::info
+
+The `unsubscribe` command may or may not delete any data, depending on which version of Chia you are running:
+* Prior to version 2.1, the command did not delete the .dat files, nor did it delete from the database.
+* As of version 2.1, the command deletes the .dat files, but does not delete from the database.
+* In a future release, the command will also delete from the database.
+
+:::
+
+Example:
+
+<details>
+<summary>Example</summary>
+
+```bash
+chia data unsubscribe -store 8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d
+```
+
+Response:
+
+```
+None
+```
+
+</details>
+
+---
+
 ### `update_data_store`
 
 Functionality: Update a data store with a given changelist. Triggers a Chia transaction
@@ -543,9 +1036,9 @@ Options:
 | :------------ | :-------------- | :------ | :------- | :------------------------------------------------------------------------------------------------------ |
 | -store        | --id            | TEXT    | True     | The hexadecimal store ID                                                                                |
 | -d            | --changelist    | TEXT    | True     | A JSON object representing the changelist                                                               |
-| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                      |
 | -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under wallet in config.yaml |
 | -m            | --fee           | TEXT    | False    | Set the fees for the transaction, in XCH                                                                |
+| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                      |
 | -h            | --help          | None    | False    | Show a help message and exit                                                                            |
 
 A few notes on the `-d` / `--changelist` option:
@@ -731,264 +1224,18 @@ value = {
 
 ---
 
-### `get_root`
+### `wallet_log_in`
 
-Functionality: Get the Merkle Root and timestamp of a given store ID
+Functionality: Request that the wallet service be logged in to the specified fingerprint
 
-Usage: `chia data get_root [OPTIONS]`
-
-Options:
-
-| Short Command | Long Command    | Type    | Required | Description                                                                                                 |
-| :------------ | :-------------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------- |
-| -store        | --id            | TEXT    | True     | The hexadecimal store id                                                                                    |
-| -f            | --fingerprint   | INTEGER | False    | Set the fingerprint to specify which wallet to use                                                          |
-| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml |
-| -h            | --help          | None    | False    | Show a help message and exit                                                                                |
-
-<details>
-<summary>Example</summary>
-
-```bash
-chia data get_root --id 1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f
-```
-
-Response:
-
-```
-{
-    'confirmed': True,
-    'hash': '0xd6d6b4d6bbd77aaa5927c8a21a1451b35f4860a7f9a58e51dae04037da9c08e8',
-    'success': True,
-    'timestamp': 1661148611
-}
-```
-
-</details>
-
----
-
-### `get_root_history`
-
-Functionality: Get a history of root hashes for a Store ID that you subscribe to
-
-Usage: `chia data get_root_history [OPTIONS]`
-
-Options:
-
-| Short Command | Long Command    | Type    | Required | Description                                                                                                 |
-| :------------ | :-------------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------- |
-| -store        | --id            | TEXT    | True     | The hexadecimal store id                                                                                    |
-| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml |
-| -h            | --help          | None    | False    | Show a help message and exit                                                                                |
-
-<details>
-<summary>Example</summary>
-
-```bash
-chia data get_root_history --id 1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f
-```
-
-Response:
-
-```
-{
-    'root_history': [
-        {
-            'confirmed': True,
-            'root_hash': '0x0000000000000000000000000000000000000000000000000000000000000000',
-            'timestamp': 1661141342
-        },
-        {
-            'confirmed': True,
-            'root_hash': '0xe488fa1bf0f712b224df0daf312b3d479f80e3a330d4bebd8f26a0d52dc0ebbb',
-            'timestamp': 1661144917
-        },
-        {
-            'confirmed': True,
-            'root_hash': '0x0000000000000000000000000000000000000000000000000000000000000000',
-            'timestamp': 1661145223
-        },
-        {
-            'confirmed': True,
-            'root_hash': '0xb5420e65846ded936d1e4855c066247fc461a3b281cd9e0e69f3cfa4df529ba2',
-            'timestamp': 1661145404
-        },
-        {
-            'confirmed': True,
-            'root_hash': '0xd6d6b4d6bbd77aaa5927c8a21a1451b35f4860a7f9a58e51dae04037da9c08e8',
-            'timestamp': 1661148611
-        }
-    ],
-    'success': True
-}
-```
-
-</details>
-
----
-
-### `subscribe`
-
-Functionality: Subscribe to a store ID
-
-Usage: `chia data subscribe [OPTIONS]`
+Usage: `chia data wallet_log_in [OPTIONS]`
 
 Options:
 
 | Short Command | Long Command    | Type    | Required | Description                                                                                             |
 | :------------ | :-------------- | :------ | :------- | :------------------------------------------------------------------------------------------------------ |
-| -store        | --id            | TEXT    | True     | The hexadecimal ID of the store to which you would like to subscribe                                    |
-| -u            | --url           | TEXT    | False    | A URL where the data store resides. This argument can be used multiple times in the same command        |
 | -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under wallet in config.yaml |
+| -f            | --fingerprint   | INTEGER | True     | Fingerprint of the wallet to use                                                                        |
 | -h            | --help          | None    | False    | Show a help message and exit                                                                            |
 
-<details>
-<summary>Example 1</summary>
-
-Subscribe to a data store without specifying any URLs:
-
-```bash
-chia data subscribe -store 8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d
-```
-
-Response:
-
-```
-None
-```
-
-Use the `subscriptions` RPC to list all current subscriptions:
-
-```bash
-chia rpc data_layer subscriptions
-```
-
-Response:
-
-```bash
-{
-    "store_ids": [
-        "1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f",
-        "8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d"
-    ],
-    "success": true
-}
-```
-
-</details>
-
-<details>
-<summary>Example 2</summary>
-
-Subscribe to a data store using multiple URLs where that store resides:
-
-```bash
-chia data subscribe -store 8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d -u http://www.example.com:8575 -u http://www.example2.com:8575
-```
-
-Response:
-
-```
-None
-```
-
-Use the `subscriptions` RPC to list all current subscriptions:
-
-```bash
-chia rpc data_layer subscriptions
-```
-
-Response:
-
-```bash
-{
-    "store_ids": [
-        "1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f",
-        "8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d"
-    ],
-    "success": true
-}
-```
-
-</details>
-
 ---
-
-### `unsubscribe`
-
-Functionality: Unsubscribe from a store ID
-
-Usage: `chia data unsubscribe [OPTIONS]`
-
-Options:
-
-| Short Command | Long Command    | Type    | Required | Description                                                                                             |
-| :------------ | :-------------- | :------ | :------- | :------------------------------------------------------------------------------------------------------ |
-| -store        | --id            | TEXT    | True     | The hexadecimal ID of the store to which you would like to unsubscribe                                  |
-| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under wallet in config.yaml |
-| -h            | --help          | None    | False    | Show a help message and exit                                                                            |
-
-Example:
-
-<details>
-<summary>Example</summary>
-
-```bash
-chia data unsubscribe -store 8f6ed792bbbf5216f8e55064793f74ce01286b9c1d542cc4a357cf7f8712df1d
-```
-
-Response:
-
-```
-None
-```
-
-</details>
-
----
-
-### `get_kv_diff`
-
-Functionality: Get the kv diff between two hashes within the same store ID
-
-Usage: `chia data get_kv_diff [OPTIONS]`
-
-Options:
-
-| Short Command | Long Command    | Type    | Required | Description                                                                                                 |
-| :------------ | :-------------- | :------ | :------- | :---------------------------------------------------------------------------------------------------------- |
-| -store        | --id            | TEXT    | True     | The hexadecimal store ID                                                                                    |
-| -hash_1       | --hash_1        | TEXT    | True     | The first hash to compare                                                                                   |
-| -hash_2       | --hash_2        | TEXT    | True     | The second hash to compare                                                                                  |
-| -dp           | --data-rpc-port | INTEGER | False    | Set the port where the DataLayer is hosting the RPC interface. See rpc_port under data_layer in config.yaml |
-| -h            | --help          | None    | False    | Show a help message and exit                                                                                |
-
-<details>
-<summary>Example</summary>
-
-```bash
-chia data get_kv_diff --id 1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f -hash_1 0x26e60dd9b493eee1f6781fc13dd025e0bfafcde5a103c95dd087d91bd848d406 -hash_2 0xc2dc94c2a85d7db4cfdd1d907bcc441c8fce595db2e2075b973fb8171e2f19a2
-```
-
-Response:
-
-```
-{
-    'diff': [
-        {
-            'key': '0005',
-            'type': 'INSERT',
-            'value': 'beadfeed'
-        },
-        {
-            'key': '0004',
-            'type': 'DELETE',
-            'value': '0123456789abcdef'
-        }
-    ],
-    'success': True
-}
-```
-
-</details>

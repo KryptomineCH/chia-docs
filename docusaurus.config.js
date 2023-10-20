@@ -1,3 +1,5 @@
+const math = require('remark-math');
+const katex = require('rehype-katex');
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (
   module.exports = {
@@ -8,7 +10,7 @@
     baseUrl: '/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'throw',
-    favicon: 'img/chia_leaf_green.svg',
+    favicon: '/svg/chia-leaf-green.svg',
     organizationName: 'Chia-Network',
     projectName: 'chia-docs',
     i18n: {
@@ -20,15 +22,12 @@
         '@docusaurus/preset-classic',
         /** @type {import('@docusaurus/preset-classic').Options} */
         ({
-          gtag: {
-            trackingID: 'G-6HSSLLPE6Q',
-            anonymizeIP: true,
-          },
           docs: {
             routeBasePath: '/',
             sidebarPath: require.resolve('./sidebars.js'),
-            editUrl:
-              'https://github.com/Chia-Network/chia-docs/blob/main/',
+            editUrl: 'https://github.com/Chia-Network/chia-docs/blob/main/',
+            remarkPlugins: [math],
+            rehypePlugins: [katex],
           },
           theme: {
             customCss: require.resolve('./src/css/custom.css'),
@@ -56,7 +55,7 @@
             },
             {
               type: 'doc',
-              docId: 'guides/chialisp-primer/intro',
+              docId: 'guides/crash-course/introduction',
               position: 'left',
               label: 'Guides',
             },
@@ -153,6 +152,22 @@
           docsRouteBasePath: '/',
         }),
       ],
+    ],
+    stylesheets: [
+      {
+        href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+        type: 'text/css',
+        integrity:
+          'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+        crossorigin: 'anonymous',
+      },
+    ],
+    scripts: [
+      {
+        src: '/js/matomo.js',
+        async: true,
+        defer: true,
+      },
     ],
   }
 );
